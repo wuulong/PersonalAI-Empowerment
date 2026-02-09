@@ -26,13 +26,13 @@
 
 ## 🛠️ 專案特色
 
-- **事實對齊 (Fact Alignment)**：書中提到的每一個關鍵領悟，皆掛載了實體 Session ID 或存檔檔名。
-- **數位格律 (Digital Meter)**：整本書的建構過程嚴格遵守一套預定義的協議，確保產出的嚴謹度與穩定性。
-- **建構紀錄 (Construction Log)**：本書包含一份 `10_Construction_Meta_Log.md`，忠實記錄了人機協作「寫成這本書」的每一個決策點。這本身就是一場數位身教。
+- **事實對齊 (Fact Alignment)**：書中提到的每一個關鍵領悟，皆掛載了實體 Session ID 或存檔檔名（如 `I-CLI-xx`, `I-AG-xx`）。
+- **數位格律 (Digital Meter)**：整本書的建構過程嚴格遵守一套預定義的協議（如 $Q::/A::/M::$），確保產出的嚴謹度與穩定性。
+- **建構紀錄 (Meta-Awareness)**：不僅紀錄結果，更透過 `M::` 協議即時捕捉人機協作過程中的捕捉施工現場的驚訝與領悟。
 
 ## 🛡️ 隱私與透明度聲明
 
-為了維持信度，本書提供了大量的 **考古座標**（如 `I-CLI-xx` 或 Session ID）。
+為了維持信度，本書提供了大量的 **考古座標**。
 - 您可以將這些座標視為歷史層的地理索引，證明這些對話確實發生過。
 - 基於個人隱私保護，原始的 `logs.json` 與私有數據不予釋出。我們將「數據」留在工作區，將「領悟」與「架構」呈現給各位讀者。
 
@@ -41,11 +41,9 @@
 ## 🗂️ 目錄導覽
 
 - [全書大綱 (TOC)](00_toc.md)
-- [建構紀錄 (Construction Log)](10_Construction_Meta_Log.md)
-- [領悟追蹤索引 (Insight Index)](20_Insight_Trace_Index.md)
 - **正式書稿 (Chapters)**: `Chapter_*.md`
 
 ---
 **Author**: wuulong  
 **Era**: Antigravity / Agentic Age  
-**Status**: In Construction (Phase 2)
+**Status**: Part I Completed (2026-02-09)
