@@ -26,13 +26,15 @@
 
 ## 🛠️ 專案特色
 
-- **事實對齊 (Fact Alignment)**：書中提到的每一個關鍵領悟，皆掛載了實體 Session ID 或存檔檔名（如 `I-CLI-xx`, `I-AG-xx`）。
+- **事實對齊 (Fact Alignment)**：書中提到的每一個關鍵領悟，皆掛載了實體 Session ID 或存檔檔名。
 - **數位格律 (Digital Meter)**：整本書的建構過程嚴格遵守一套預定義的協議（如 $Q::/A::/M::$），確保產出的嚴謹度與穩定性。
-- **建構紀錄 (Meta-Awareness)**：不僅紀錄結果，更透過 `M::` 協議即時捕捉人機協作過程中的捕捉施工現場的驚訝與領悟。
+- **M:: 協議與心流捕捉**：最新引入的即時領悟鎖定機制，確保「施工現場的驚訝」能與技術證據即時掛鉤。
+- **建構紀錄 (Construction Log)**：本書包含一份 `10_Construction_Meta_Log.md`，忠實記錄了人機協作「寫成這本書」的每一個決策點。
+- **元對話紀錄 (Meta Writing Log)**：在 `22_Meta_Writing_Log.md` 中保存了目錄演化與架構思維的深層對話。
 
 ## 🛡️ 隱私與透明度聲明
 
-為了維持信度，本書提供了大量的 **考古座標**。
+為了維持信度，本書提供了大量的 **考古座標**（如 `I-CLI-xx`、`I-AG-xx`）。
 - 您可以將這些座標視為歷史層的地理索引，證明這些對話確實發生過。
 - 基於個人隱私保護，原始的 `logs.json` 與私有數據不予釋出。我們將「數據」留在工作區，將「領悟」與「架構」呈現給各位讀者。
 
@@ -40,10 +42,13 @@
 
 ## 🗂️ 目錄導覽
 
-- [全書大綱 (TOC)](00_toc.md)
-- **正式書稿 (Chapters)**: `Chapter_*.md`
+- [全書大綱 (TOC)](PersonalAI-Empowerment/00_toc.md)
+- [寫作計畫 (Writing Plan)](01_Chapter_Writing_Plan.md)
+- [建構紀錄 (Construction Log)](10_Construction_Meta_Log.md)
+- [元對話紀錄 (Meta Writing Log)](construction_materials/22_Meta_Writing_Log.md)
+- [正式書稿 (Content)](PersonalAI-Empowerment/)
 
 ---
 **Author**: wuulong  
 **Era**: Antigravity / Agentic Age  
-**Status**: Part I Completed (2026-02-09)
+**Status**: Part I Completed / Part II Planning (2026-02-09)
