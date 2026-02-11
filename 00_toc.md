@@ -90,9 +90,22 @@
 - 8.14 練習 1.14：🔴 邁向認知主權 —— 我的個人自學成果總結與考古對位
 
 ## 第 9 章：NotebookLM —— 數據定錨、多態轉化與「數位分身」 (Step 2)
-理解資訊形態轉化的本質，建立對證據的敬畏。
-- **核心練習**：全形態資料匯入、多態呈現轉化 (Table/Tree/Audio)、救命會議記錄、靈魂轉譯員。
-- **進階養成**：[T-1.1] 數位考古學、[T-2.3] 抽象化思考、[T-6.3] 錄音轉化流與遺忘的藝術。
+理解資訊形態轉化的本質，建立對證據的敬畏。 [1,000,000+ Context Window]
+- 9.0 導論：從「碎片」到「定錨」——資訊形態轉化的魂魄 (The Soul of Metamorphosis)
+- 9.1 練習 2.1：🟢 真相定錨與多模態大熔爐 (PDF, YouTube, Image OCR)
+- 9.2 練習 2.2：🟡 知識收割與輸出權力 (Export, Join Sharing & Critique Mode)
+- 9.3 練習 2.3：🟡 跨來源「金線」萃取與動態心智圖 (Cross-Source Synthesis & Dynamic Mapping)
+- 9.4 練習 2.4：🟢 認知擴張與來源建構 (Fast & Deep Research Scouting)
+- 9.5 練習 2.5：🟢 生活與學術的「降維打擊」 (Life Hacks & Paper Decoding)
+- 9.6 練習 2.6：🟢 釋放頻寬的「錄音即紀錄」 (Audio Interaction & Join Mode)
+- 9.7 練習 2.7：🔴 形態幻化 —— 個人媒體工作室 (Slides Deck & Debate Mode)
+- 9.8 練習 2.8：🔴 影片分享的知識點「刨根」 (YouTube Video transcription & Indexing)
+- 9.9 練習 2.9：🔴 數位人格的鏡像診斷 (Psychological Context Mirroring)
+- 9.10 練習 2.10：🟡 版本演化追蹤 (Version Evolution & Decision Logic)
+- 9.11 練習 2.11：🔴 批判性「紅軍測試」 (Red Teaming Assumptions via Critique)
+- 9.12 練習 2.12：🟡 漸進式認知導航 (Guided Learning Path)
+- 9.13 練習 2.13：🟢 打造「賦能懶人包」 (Interactive Knowledge Assets)
+- 9.14 章節總結：從「資訊消費者」到「知識建築師」的演化總覽 (Summary & Architecture Atlas)
 
 ## 第 10 章：Antigravity —— Agentic 統御、極速生產與持久化 (Step 3)
 感受從「對話者」到「架構師」的效率躍遷，建立生產紀律。
