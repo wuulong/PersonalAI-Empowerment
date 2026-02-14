@@ -9,7 +9,7 @@
 
 在 AI 浪潮下，多數人追求的是「效率」與「省力」。本書則提出了一個截然不同的路徑：**「主權」與「架構」**。
 
-本書記錄了作者 wuulong 從 2023 年春天至今，與 AI 深度共作、學習與演化的真實歷程。透過 **「數位考古 (Digital Archaeology)」** 的方法論，我們從數萬行日誌、Session ID 與實體工件中，提煉出這場「心智覺醒」的證據。
+本書記錄了作者 哈爸 從 2023 年春天至今，與 AI 深度共作、學習與演化的真實歷程。透過 **「數位考古 (Digital Archaeology)」** 的方法論，我們從數萬行日誌、Session ID 與實體工件中，提煉出這場「心智覺醒」的證據。
 
 ## 🏗️ 核心架構
 
@@ -29,8 +29,6 @@
 - **事實對齊 (Fact Alignment)**：書中提到的每一個關鍵領悟，皆掛載了實體 Session ID 或存檔檔名。
 - **數位格律 (Digital Meter)**：整本書的建構過程嚴格遵守一套預定義的協議（如 $Q::/A::/M::$），確保產出的嚴謹度與穩定性。
 - **M:: 協議與心流捕捉**：最新引入的即時領悟鎖定機制，確保「施工現場的驚訝」能與技術證據即時掛鉤。
-- **建構紀錄 (Construction Log)**：本書包含一份 `10_Construction_Meta_Log.md`，忠實記錄了人機協作「寫成這本書」的每一個決策點。
-- **元對話紀錄 (Meta Writing Log)**：在 `22_Meta_Writing_Log.md` 中保存了目錄演化與架構思維的深層對話。
 
 ## 🛡️ 隱私與透明度聲明
 
@@ -42,13 +40,10 @@
 
 ## 🗂️ 目錄導覽
 
-- [全書大綱 (TOC)](PersonalAI-Empowerment/00_toc.md)
-- [寫作計畫 (Writing Plan)](01_Chapter_Writing_Plan.md)
-- [建構紀錄 (Construction Log)](10_Construction_Meta_Log.md)
-- [元對話紀錄 (Meta Writing Log)](construction_materials/22_Meta_Writing_Log.md)
-- [正式書稿 (Content)](PersonalAI-Empowerment/)
+- [全書大綱 (TOC)](00_toc.md)
+- [正式書稿 (Content)](./)
 
 ---
-**Author**: wuulong  
+**Author**: 哈爸  
 **Era**: Antigravity / Agentic Age  
-**Status**: Part I Completed / Part II Planning (2026-02-09)
+**Status**: v1.0 Completed (2026-02-14)
