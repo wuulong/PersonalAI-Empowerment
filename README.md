@@ -60,6 +60,7 @@
 - [全書集成 Markdown](FullBook_Personal_AI_Empowerment.md)
 - [全書 PDF](FullBook_Personal_AI_Empowerment.pdf)
 - [NotebookLM with 全書](https://notebooklm.google.com/notebook/61364313-0ced-466a-b674-a85ebc7f2ab0)
+    - [slides by NotebookLM](https://drive.google.com/open?id=1xcwWKwxKW5GRtXQAO2r4npZr6xy7rerw&usp=drive_copy)
 
 ---
 **Author**: 哈爸  
