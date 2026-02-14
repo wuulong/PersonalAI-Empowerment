@@ -1,6 +1,8 @@
 # 個人賦能 (Personal Empowerment)
 ## AI 時代的架構師進化史：從工具人到「雙核共生」的覺醒之路
 
+**當前版本**：[v1.0.0](VERSION.md) (2026-02-14)
+
 > 「這不是一本由 AI 代寫的漂亮廢話，這是一場橫跨三年的數位考古實驗，每一句話都對齊真實的對話地層。」
 
 ---
@@ -58,7 +60,8 @@
 - [全書詳細大綱 (TOC)](00_toc.md)
 - [瀏覽章節原始碼 (Content)](./)
 - [全書集成 Markdown](FullBook_Personal_AI_Empowerment.md)
-- [全書 PDF](FullBook_Personal_AI_Empowerment.pdf)
+- [全書集成 PDF](FullBook_Personal_AI_Empowerment.pdf)
+- [版本歷史 (Version History)](VERSION.md)
 - [NotebookLM with 全書](https://notebooklm.google.com/notebook/61364313-0ced-466a-b674-a85ebc7f2ab0)
     - [slides by NotebookLM](https://drive.google.com/open?id=1xcwWKwxKW5GRtXQAO2r4npZr6xy7rerw&usp=drive_copy)
 
