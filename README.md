@@ -38,10 +38,25 @@
 
 ---
 
-## 🗂️ 目錄導覽
+## 📥 完整下載 (Full Downloads)
 
-- [全書大綱 (TOC)](00_toc.md)
-- [正式書稿 (Content)](./)
+您可以透過以下連結獲取全書集成版本，方便離線閱讀或導入個人知識庫：
+
+*   **[全書集成 Markdown (.md)](FullBook_Personal_AI_Empowerment.md)**：最適合導入 Obsidian 或 Notion 進行深度學習。
+*   **[全書集成 PDF (.pdf)](FullBook_Personal_AI_Empowerment.pdf)**：適合跨裝置閱讀。
+
+### 如何簡單下載？
+1.  點擊上方您需要的檔案連結。
+2.  進入 GitHub 檔案預覽頁面後，點擊右側的 **「Download raw file」** 或 **「Download」** 按鈕即可儲存至您的電腦。
+
+---
+
+## 🗂️ 快速導覽
+
+- [全書詳細大綱 (TOC)](00_toc.md)
+- [瀏覽章節原始碼 (Content)](./)
+- [全書集成 Markdown](FullBook_Personal_AI_Empowerment.md)
+- [全書集成 PDF](FullBook_Personal_AI_Empowerment.pdf)
 
 ---
 **Author**: 哈爸  
