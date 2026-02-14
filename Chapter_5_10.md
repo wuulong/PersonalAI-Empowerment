@@ -32,8 +32,8 @@ graph TD
     end
 
     subgraph 實戰交付域 [The Action: Results]
-        C1[代碼/工具: Python/Apps] 
-        C2[實地數據: GIS/POI]
+        C1[程式碼/工具: Python/Apps] 
+        C2[實地資料: GIS/POI]
         C3[文件成果: Book/Reports]
     end
 

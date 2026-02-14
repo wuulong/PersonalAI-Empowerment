@@ -9,7 +9,7 @@
     2.  **觀察工具泡泡 (Tool Bubbles)**：這是 Antigravity 最迷人的時刻。您會看到介面上跳出多層次的泡泡：
         *   `reading_files` (讀取本地資料)
         *   `google_search` (抓取即時情報)
-        *   `python_interpreter` (進行比對分析或生成檔案)
+        *   `python_interpreter` (進行比對分析或產出檔案)
     3.  **驗證實體產出**：檢查產出的 PDF 檔案。在 Antigravity 中，AI 的回答不再只是文字，而是具備「實體行為」的結果。
 
 *   **【差異化思考】**：

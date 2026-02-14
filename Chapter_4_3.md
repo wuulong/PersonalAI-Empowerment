@@ -1,10 +1,10 @@
-# 4.3 數據守衛與品味裁決：以 Schema 為骨架、以「不滿意」為羅盤 (Skeleton & Compass)
+# 4.3 資料守衛與品味裁決：以 Schema 為骨架、以「不滿意」為羅盤 (Skeleton & Compass)
 
 在系統工程的質變中，我學到了兩件看似矛盾但互補的事情：第一，AI 必須被「硬性規約」束縛，它才有生產力；第二，AI 的產出必須被「感性品質」裁決，它才有生命力。
 
-這就是本章核心的工程與魂——**數據守衛 (Data Guard)** 與 **品味裁決 (Taste Adjudication)**。
+這就是本章核心的工程與魂——**資料守衛 (Data Guard)** 與 **品味裁決 (Taste Adjudication)**。
 
-### 數據守衛：Schema 是 AI 的氧氣
+### 資料守衛：Schema 是 AI 的氧氣
 
 2025 年 8 月 21 日（紀錄編號 `I-CLI-03`），我寫下了一段長達萬字的 Prompt。裡面沒有感性的形容詞，而是密密麻麻的 `db_schema_info`、`data_spec` 與 `foreign key` 的定義。
 

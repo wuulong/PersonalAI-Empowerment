@@ -54,7 +54,7 @@ graph TD
     subgraph 固化區 [Solidification]
         D --> D1[QS/AS/M/Agent 四層掛鉤]
         E --> E1[NotebookLM 結構化]
-        E1 --> E2[Antigravity 考古對標]
+        E1 --> E2[Antigravity 考古對位]
     end
 
     D1 --> F[數位化石: Construction Materials]

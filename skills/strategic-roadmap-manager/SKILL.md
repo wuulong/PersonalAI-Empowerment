@@ -39,7 +39,7 @@ AI 會先讀取 `@/workmgr/strategy/USER_STRATEGIC_CONTEXT.md`。此檔案存放
 2. 同步更新/彙整年度檔案 `roadmap_YYYY.md`，維持年度目標的連貫性。
 
 ### Phase 3: 狀態校準 (Alignment)
-1. 生成本月檔案並與上個月進行對比。
+1. 產出本月檔案並與上個月進行對比。
 2. 標註「原定計劃的偏離處」與「新長出的戰略支線」。
 3. 詢問使用者：「這個架構圖符合您現在腦中的直覺嗎？」
 
@@ -64,5 +64,5 @@ AI 會先讀取 `@/workmgr/strategy/USER_STRATEGIC_CONTEXT.md`。此檔案存放
 - 在 `timeline` 語法中，使用 `: Status=Done` 或 `: Status=Active` 來直覺化進度，這也是本 Skill 的標準標記法。
 
 ### 外部連結自動化 (已掛起)
-- 曾嘗試自動化生成 `mermaid.live` 連結，但因第三方工具對 JSON 狀態極度敏感而暫停。
+- 曾嘗試自動化產出 `mermaid.live` 連結，但因第三方工具對 JSON 狀態極度敏感而暫停。
 - 技術細節請參考：[Mermaid.live 連結自動化筆記](../../docs/strategy/notes/mermaid_link_automation_lessons.md)
