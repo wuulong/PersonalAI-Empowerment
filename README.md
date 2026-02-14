@@ -58,7 +58,8 @@
 - [全書詳細大綱 (TOC)](00_toc.md)
 - [瀏覽章節原始碼 (Content)](./)
 - [全書集成 Markdown](FullBook_Personal_AI_Empowerment.md)
-- [全書集成 PDF](FullBook_Personal_AI_Empowerment.pdf)
+- [全書 PDF](FullBook_Personal_AI_Empowerment.pdf)
+- [NotebookLM with 全書](https://notebooklm.google.com/notebook/61364313-0ced-466a-b674-a85ebc7f2ab0)
 
 ---
 **Author**: 哈爸  
