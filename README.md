@@ -44,6 +44,8 @@
   內建專案定錨、有向演化主題、抽象根路徑解耦（環境無涉移植）、12V 高驅動下真實 `23.47%` 非線性 Duffing 偏離實測資料、以及 PLL 動態電路補償的紅軍 PASS 攻防鐵證，提供完整的學術數位基因鏈。
 - **📄 學術主權與資料庫實踐指南** ([scripts/research/Sovereign_Research_Database_Guide.md](scripts/research/Sovereign_Research_Database_Guide.md))：
   完整拆解 Ingestion, Calibration, Critique, Writing 四大黃金工序，內含指導教授專用進度與強度 SQL 檢核照妖鏡；嵌入動態 Mermaid 互動共生流程圖與 Mermaid Live Editor 線上開啟直連 Link。
+- **📄 個人學術主權資料庫延伸與實戰指南** ([scripts/research/Personal_Extension_Guide.md](scripts/research/Personal_Extension_Guide.md))：
+  手把手引導讀者如何跳脫教學沙盒、開闢個人真實學術資料庫、進行裝置相對路徑映射（Directory Roots）、導入實測 COMSOL/Python 物理數據，並建立自我思維紅軍防禦體系。
 - **🐍 零第三方套件依賴 CLI 探勘腳本** ([scripts/research/paper_scout.py](scripts/research/paper_scout.py))：
   具備相對路徑自動化還原、多重格式 URL 下載關聯、與模擬離線降級避退（Offline Mock Mode）的 Python CLI 腳本。
 - **📄 可移植的學術導航員 Skill 技能檔** ([skills/academic-research-navigator/SKILL.md](skills/academic-research-navigator/SKILL.md))：

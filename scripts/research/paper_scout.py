@@ -6,8 +6,9 @@ import urllib.parse
 import json
 import sqlite3
 import xml.etree.ElementTree as ET
+from datetime import datetime
 
-DB_PATH = "/Users/wuulong/github/bmad-pa/events/AIBooks/PersonalEmpowerment/PersonalAI-Empowerment/data/research/Research_Artifacts.db"
+DEFAULT_DB_PATH = "/Users/wuulong/github/bmad-pa/events/AIBooks/PersonalEmpowerment/PersonalAI-Empowerment/data/research/Research_Artifacts.db"
 
 # ==============================================================================
 # 【學術去敏感化 100% 中文精裝版】本地離線模擬資料集
@@ -157,7 +158,6 @@ MOCK_PAPERS = [
     }
 ]
 
-# 本地模擬數據（對位現地真理）
 MOCK_SIMULATIONS = [
     {
         "sim_id": "sim_run_1",
@@ -173,14 +173,14 @@ MOCK_SIMULATIONS = [
             "measured_IL_dB": 2.8,
             "measured_coupling_k2": 0.085
         },
-        "discrepancy_percentage": 1.67 # 理論Q值 12000 與實測Q值 11800 的誤差百分比
+        "discrepancy_percentage": 1.67
     },
     {
         "sim_id": "sim_run_2",
         "paper_id": "semscholar_love_2025",
         "run_config": {
             "f0_MHz": 26.8,
-            "drive_voltage": 12.0, # 施加 12V 強激勵電壓
+            "drive_voltage": 12.0,
             "piezo_material": "PZT-5H",
             "support_clamping": "Free_Edge"
         },
@@ -190,11 +190,10 @@ MOCK_SIMULATIONS = [
             "hysteresis_detected": True,
             "measured_IL_dB": 5.2
         },
-        "discrepancy_percentage": 23.47 # 由於 12V 觸發 Duffing 分歧而未受補償，導致實測Q值大幅暴跌，偏離線性理論高達 23.47%
+        "discrepancy_percentage": 23.47
     }
 ]
 
-# 紅軍自審與品位裁決對抗紀錄
 MOCK_RED_TEAM_LOGS = [
     {
         "log_id": "crit_1",
@@ -206,7 +205,6 @@ MOCK_RED_TEAM_LOGS = [
     }
 ]
 
-# 研究生自己的主權手稿有向演化鏈
 MOCK_MY_MANUSCRIPTS = [
     {
         "manuscript_id": "ms_conf_2026",
@@ -228,7 +226,7 @@ MOCK_MY_MANUSCRIPTS = [
         "cite_key": "Wuulong2026Journal",
         "manuscript_type": "Journal",
         "evolution_stage": "Writing",
-        "previous_manuscript_id": "ms_conf_2026", # 🧬 【有向演化鏈】：繼承並修正前一篇會議論文的理論與實驗結果
+        "previous_manuscript_id": "ms_conf_2026",
         "meta_data": {
             "target_journal": "IEEE Transactions on Industrial Electronics",
             "overleaf_url": "https://www.overleaf.com/project/mock_wuulong_journal_2026"
@@ -250,23 +248,56 @@ MOCK_MANUSCRIPT_CITATIONS = [
 ]
 
 # ==============================================================================
+# 資料庫自動化建立與初始化
+# ==============================================================================
+
+def init_db_schema_if_needed(db_path):
+    """如果資料庫檔案不存在或未初始化，自動載入 schema.sql 進行結構初始化"""
+    db_dir = os.path.dirname(db_path)
+    if db_dir:
+        os.makedirs(db_dir, exist_ok=True)
+        
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    
+    # 檢查是否已存在 tables
+    try:
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+        tables = cursor.fetchall()
+        if len(tables) >= 5:
+            conn.close()
+            return # 已初始化
+    except Exception:
+        pass
+        
+    print(f"🌱 偵測到全新的資料庫，正在自動初始化 DDL 結構: {db_path}")
+    schema_path = os.path.join(os.path.dirname(__file__), "schema.sql")
+    if os.path.exists(schema_path):
+        with open(schema_path, "r", encoding="utf-8") as f:
+            schema_sql = f.read()
+        cursor.executescript(schema_sql)
+        conn.commit()
+        print("✅ 資料表結構初始化成功！")
+    else:
+        print(f"⚠️ 找不到 schema.sql 於 {schema_path}，無法自動初始化表格結構。")
+    conn.close()
+
+# ==============================================================================
 # 主要核心功能
 # ==============================================================================
 
-def clean_and_rebuild_mock():
+def clean_and_rebuild_mock(db_path):
     """Wipe the database completely and populate v1.2.0 Three-Tier Chinese Mock Data."""
-    if not os.path.exists(DB_PATH):
-        print(f"❌ 資料庫不存在於 {DB_PATH}，請先執行 setup_research_db.py 建立資料表結構。")
-        return
+    init_db_schema_if_needed(db_path)
         
-    print(f"🧹 正在連線至 SQLite 資料庫，準備清理舊範例資料: {DB_PATH}")
-    conn = sqlite3.connect(DB_PATH)
+    print(f"🧹 正在連線至 SQLite 資料庫，準備清理舊範例資料: {db_path}")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     
     # 確保外鍵約束開啟
     cursor.execute("PRAGMA foreign_keys = ON;")
     
-    # 1. 依賴順序清理舊數據 (外鍵約束下，從最深層往最表層清理)
+    # 1. 依賴順序清理舊數據
     tables_to_clean = [
         "manuscript_citations", "my_manuscripts", "red_team_logs", 
         "local_simulations", "paper_tags", "paper_urls", "papers", 
@@ -309,7 +340,7 @@ def clean_and_rebuild_mock():
             json.dumps({"initiator": "Habar", "field": "Piezoelectric MEMS"}, ensure_ascii=False)
         ))
         
-        # 3. 導入主題 Topics (邏輯脊椎)
+        # 3. 導入主題 Topics
         for t in MOCK_TOPICS:
             cursor.execute("""
             INSERT INTO topics (topic_id, project_id, topic_name, sequence_order, focus_spec, status, meta_data)
@@ -358,7 +389,6 @@ def clean_and_rebuild_mock():
             # 導入 URLs
             for idx, url in enumerate(p["urls"]):
                 link = url["link"]
-                # 智慧型動態路徑抽象化轉換
                 zotero_prefix = "file:///Users/wuulong/Zotero/storage/"
                 if link.startswith(zotero_prefix):
                     root_key = "zotero_storage"
@@ -391,9 +421,8 @@ def clean_and_rebuild_mock():
                     tag,
                     json.dumps({"source": "Auto-scout打標"}, ensure_ascii=False)
                 ))
-
                 
-        # 5. 導入本地模擬與實測數據 Simulations (對位現地真理)
+        # 5. 導入本地模擬與實測數據 Simulations
         for s in MOCK_SIMULATIONS:
             cursor.execute("""
             INSERT INTO local_simulations (sim_id, paper_id, run_config, empirical_results, discrepancy_percentage, meta_data)
@@ -452,14 +481,7 @@ def clean_and_rebuild_mock():
         conn.commit()
         print("🎉 恭喜！【三層主權知識星系架構 v1.2.0】100% 中文硬核學術範例數據導入成功！")
         print("----------------------------------------------------------------------")
-        print(f"📊 已生成 10 個完整關聯表格，包含:")
-        print(f"  - 1 個學術研究大專案 (AR-WET 無線傳能)")
-        print(f"  - 3 個循序漸進的主題 (物理建模 -> Duffing補償 -> 生物實測)")
-        print(f"  - 3 篇精選背景文獻 (Seong2026, Tanaka2024, Love2025)")
-        print(f"  - 7 個多重格式連結與 9 個多維關係標籤")
-        print(f"  - 2 次本地實測對位 (包含 Duffing 非線性分歧觸發導致誤差 23.47% 的真值對比)")
-        print(f"  - 1 筆紅軍自審對審防禦鐵證 (評級 PASS)")
-        print(f"  - 2 篇有向手稿演化鏈 (Conf -> Journal，完美繼承寫作基因)")
+        print(f"📊 已生成 10 個完整關聯表格")
         print("----------------------------------------------------------------------")
         
     except Exception as e:
@@ -467,6 +489,203 @@ def clean_and_rebuild_mock():
         conn.rollback()
     finally:
         conn.close()
+
+# ==============================================================================
+# 線上 ArXiv REST API 檢索與 Ingestion 落地邏輯
+# ==============================================================================
+
+def query_arxiv_online(query_str, limit=5):
+    """連線至 ArXiv API 進行真實檢索，並解析 XML 返回結構化資料"""
+    encoded_query = urllib.parse.quote(query_str)
+    url = f"http://export.arxiv.org/api/query?search_query=all:{encoded_query}&max_results={limit}"
+    
+    try:
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)'})
+        with urllib.request.urlopen(req, timeout=10) as response:
+            xml_data = response.read()
+            
+        # 解析 XML Feed
+        root = ET.fromstring(xml_data)
+        
+        # Namespace 定義
+        ns = {'atom': 'http://www.w3.org/2005/Atom'}
+        entries = root.findall('atom:entry', ns)
+        
+        papers_found = []
+        for entry in entries:
+            id_url = entry.find('atom:id', ns).text.strip()
+            # 取得 ArXiv ID
+            arxiv_id = id_url.split('/abs/')[-1].split('v')[0]
+            
+            title = entry.find('atom:title', ns).text.strip().replace('\n', ' ')
+            abstract = entry.find('atom:summary', ns).text.strip().replace('\n', ' ')
+            
+            authors_nodes = entry.findall('atom:author', ns)
+            authors_list = [node.find('atom:name', ns).text.strip() for node in authors_nodes]
+            authors = ", ".join(authors_list)
+            
+            published_str = entry.find('atom:published', ns).text.strip()
+            year = int(published_str[:4])
+            
+            # 尋找 PDF 下載網址
+            pdf_url = f"https://arxiv.org/pdf/{arxiv_id}.pdf"
+            for link_node in entry.findall('atom:link', ns):
+                if link_node.attrib.get('title') == 'pdf':
+                    pdf_url = link_node.attrib.get('href')
+                    break
+                    
+            # 建立 cite_key (例如 Seong2026)
+            first_author = authors_list[0].split()[-1] if authors_list else "Unknown"
+            # 清理非英文字元
+            first_author = "".join(c for c in first_author if c.isalnum())
+            cite_key = f"{first_author}{year}{arxiv_id[:4]}"
+            
+            # 生成 BibTeX
+            bibtex = f"""@article{{{cite_key},
+  author = {{{authors}}},
+  title = {{{title}}},
+  journal = {{arXiv preprint arXiv:{arxiv_id}}},
+  year = {{{year}}}
+}}"""
+
+            papers_found.append({
+                "paper_id": f"arxiv_{arxiv_id}",
+                "cite_key": cite_key,
+                "title": title,
+                "authors": authors,
+                "year": year,
+                "abstract": abstract,
+                "pdf_url": pdf_url,
+                "bibtex": bibtex,
+                "tags": ["arxiv", "auto-scout"]
+            })
+            
+        return papers_found
+    except Exception as e:
+        print(f"⚠️ 真實網路連線失敗或超時 ({e})，準備降級至離線高保真 Sandbox 模擬結構...")
+        return None
+
+def save_papers_to_db(db_path, papers, query_str):
+    """將真實查詢到的論文結構化存入 SQLite 資料庫中 (維持 10 表聯邦約束)"""
+    init_db_schema_if_needed(db_path)
+    
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    cursor.execute("PRAGMA foreign_keys = ON;")
+    
+    try:
+        # 1. 建立 Ingestion 採集任務 (Lineage)
+        task_id = f"task_online_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        cursor.execute("""
+        INSERT INTO exploration_tasks (task_id, query, status, papers_found, agent_version, error_log, meta_data)
+        VALUES (?, ?, ?, ?, ?, ?, ?);
+        """, (
+            task_id,
+            query_str,
+            "ONLINE",
+            len(papers),
+            "Antigravity-v1.2.0-RealEngine",
+            None,
+            json.dumps({"engine": "arXiv_API", "run_at": datetime.now().isoformat()}, ensure_ascii=False)
+        ))
+        
+        # 2. 保障預設專案與預設子主題存在 (確保外鍵約束安全)
+        cursor.execute("SELECT project_id FROM projects WHERE project_id = 'prj_general';")
+        if not cursor.fetchone():
+            cursor.execute("""
+            INSERT INTO projects (project_id, project_name, description, search_spec, architecture_spec, meta_data)
+            VALUES (?, ?, ?, ?, ?, ?);
+            """, (
+                "prj_general",
+                "全域研究探勘專案",
+                "匯總所有非特定專案的真實線上文獻檢索成果。",
+                json.dumps({"keywords": ["general"]}, ensure_ascii=False),
+                json.dumps({"target": "knowledge_expansion"}, ensure_ascii=False),
+                json.dumps({"auto_created": True}, ensure_ascii=False)
+            ))
+            
+        cursor.execute("SELECT topic_id FROM topics WHERE topic_id = 'top_general';")
+        if not cursor.fetchone():
+            cursor.execute("""
+            INSERT INTO topics (topic_id, project_id, topic_name, sequence_order, focus_spec, status, meta_data)
+            VALUES (?, ?, ?, ?, ?, ?, ?);
+            """, (
+                "top_general",
+                "prj_general",
+                "全域學術主題探底",
+                1,
+                json.dumps({"focus_variables": ["general_knowledge"], "equations": []}, ensure_ascii=False),
+                "ACTIVE",
+                json.dumps({"auto_created": True}, ensure_ascii=False)
+            ))
+            
+        # 3. 確保遠端 URL 根映射存在
+        cursor.execute("SELECT root_key FROM directory_roots WHERE root_key = 'remote_url';")
+        if not cursor.fetchone():
+            cursor.execute("""
+            INSERT INTO directory_roots (root_key, owner_type, owner_name, absolute_path, meta_data)
+            VALUES (?, ?, ?, ?, ?);
+            """, ("remote_url", "GLOBAL_WEB", "internet", "", json.dumps({"description": "線上遠端網址資源入口"}, ensure_ascii=False)))
+            
+        # 4. 逐一寫入論文、URLs 與標籤
+        inserted_count = 0
+        for p in papers:
+            # 檢查是否已存在
+            cursor.execute("SELECT paper_id FROM papers WHERE paper_id = ?;", (p["paper_id"],))
+            if cursor.fetchone():
+                continue # 避免重複寫入
+                
+            cursor.execute("""
+            INSERT INTO papers (paper_id, task_id, topic_id, title, authors, year, core_method, cite_key, bibtex, meta_data)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+            """, (
+                p["paper_id"],
+                task_id,
+                "top_general",
+                p["title"],
+                p["authors"],
+                p["year"],
+                "線上文獻自動擷取",
+                p["cite_key"],
+                p["bibtex"],
+                json.dumps({"abstract_snippet": p["abstract"][:200] + "..."}, ensure_ascii=False)
+            ))
+            
+            # 寫入 URL
+            cursor.execute("""
+            INSERT INTO paper_urls (url_id, paper_id, root_key, url_link, url_type, download_status, file_size_bytes, meta_data)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+            """, (
+                f"url_{p['paper_id']}_pdf",
+                p["paper_id"],
+                "remote_url",
+                p["pdf_url"],
+                "arxiv_pdf",
+                "PENDING",
+                0,
+                json.dumps({"online_discovered": True}, ensure_ascii=False)
+            ))
+            
+            # 寫入自動打標
+            for tag in p["tags"]:
+                cursor.execute("""
+                INSERT INTO paper_tags (paper_id, tag_name, meta_data)
+                VALUES (?, ?, ?);
+                """, (p["paper_id"], tag, json.dumps({"engine": "PaperScout_Auto_Tagger"}, ensure_ascii=False)))
+                
+            inserted_count += 1
+            
+        conn.commit()
+        print(f"💾 資料庫沉澱成功！共新增 {inserted_count} 筆真實背景文獻至 SQLite ({db_path})！")
+    except Exception as e:
+        print(f"❌ 寫入真實論文至資料庫時出錯: {e}")
+        conn.rollback()
+    finally:
+        conn.close()
+
+# ==============================================================================
+# 主執行流程
+# ==============================================================================
 
 def main():
     parser = argparse.ArgumentParser(description="Paper Scout: 線上學術文獻 Scout 代理人工具")
@@ -477,68 +696,76 @@ def main():
     parser.add_argument("--output", type=str, default="markdown", choices=["markdown", "json"], help="輸出格式")
     parser.add_argument("--force-mock", action="store_true", help="強制啟用本地模擬模式，不進行網路呼叫")
     parser.add_argument("--rebuild-mock", action="store_true", help="【極客專用】一鍵清理資料庫並重建 100% 中文高階範例數據")
+    parser.add_argument("--db", type=str, help="指定目標 SQLite 資料庫路徑 (優先於環境變數 RESEARCH_DB)")
     
     args = parser.parse_args()
     
+    # 智慧資料庫路徑判定 (1. args ➔ 2. env ➔ 3. default)
+    db_path = args.db or os.environ.get("RESEARCH_DB") or DEFAULT_DB_PATH
+    
     # 判斷是否為一鍵重建範例資料
     if args.rebuild_mock:
-        clean_and_rebuild_mock()
+        clean_and_rebuild_mock(db_path)
         return
 
     if not args.query:
         print("❌ 錯誤：請提供 --query 參數以進行檢索，或使用 --rebuild-mock 進行範例數據重建。")
         return
 
-    # 此處保留線上查詢流程 (在離線時自動回歸 Mock)
+    # 執行資料庫自動 initialization
+    init_db_schema_if_needed(db_path)
+
+    # 執行真實線上檢索或降級 Fallback
     all_papers = []
-    # 這裡實作簡化的 Mock 返回 (如果遭遇 API 連線限制)
-    if args.force_mock:
-        print("⚠️ 啟用本地模擬模式...")
-        # 為保持相容性，我們只簡單顯示 MOCK_PAPERS
-        for idx, p in enumerate(MOCK_PAPERS):
+    real_online_papers = None
+    
+    if not args.force_mock:
+        real_online_papers = query_arxiv_online(args.query, args.limit)
+        
+    if real_online_papers:
+        # 使用真實線上搜尋結果
+        print(f"🎉 成功從 ArXiv 實體獲取 {len(real_online_papers)} 筆真實論文資料！")
+        for p in real_online_papers:
             all_papers.append({
                 "paper_id": p["paper_id"],
+                "cite_key": p["cite_key"],
                 "title": p["title"],
                 "authors": p["authors"],
                 "year": p["year"],
-                "core_method": p["core_method"],
-                "key_parameters": {
-                    "source": "Mock Sandbox",
-                    "citation_count": p["meta_data"]["citation_count"],
-                    "paper_url": p["urls"][0]["link"]
-                },
-                "simulation_result": p["abstract"]
+                "abstract": p["abstract"],
+                "pdf_url": p["pdf_url"],
+                "tags": p["tags"]
             })
+            
+        # 若指定了 --save-db，將其實體沉澱落庫！
+        if args.save_db:
+            save_papers_to_db(db_path, real_online_papers, args.query)
     else:
-        # 連線上網實體獲取 (arxiv)
-        print(f"🔍 正在連線 ArXiv 檢索: \"{args.query}\"...")
-        # 由於此工具已在 sandbox 中被定錨為 CLI 呼叫，在此實現簡化版 fallback
-        # (當 API 連線因網路環境失敗時，回歸乾淨的 Mock 中文資料結構)
-        for idx, p in enumerate(MOCK_PAPERS):
+        # 回歸沙盒 Mock 離線數據
+        print("⚠️ 啟用本地高保真離線沙盒數據...")
+        for p in MOCK_PAPERS:
             all_papers.append({
                 "paper_id": p["paper_id"],
+                "cite_key": p["cite_key"],
                 "title": p["title"],
                 "authors": p["authors"],
                 "year": p["year"],
-                "core_method": p["core_method"],
-                "key_parameters": {
-                    "source": "Online-Fallback",
-                    "citation_count": p["meta_data"]["citation_count"],
-                    "paper_url": p["urls"][0]["link"]
-                },
-                "simulation_result": p["abstract"]
+                "abstract": p["abstract"],
+                "pdf_url": p["urls"][0]["link"],
+                "tags": p["tags"]
             })
 
+    # 輸出結果
     if args.output == "json":
         print(json.dumps(all_papers, indent=2, ensure_ascii=False))
     else:
         # Markdown 表格輸出
-        print("\n### 📚 Paper Scout 線上文獻檢索成果")
+        print(f"\n### 📚 Paper Scout 線上文獻檢索成果 (資料庫: {os.path.basename(db_path)})")
         print("| 來源 | 發表年份 | 標題 | 作者 | 引用/連結 |")
         print("| :--- | :---: | :--- | :--- | :--- |")
         for p in all_papers:
-            source = p['key_parameters'].get('source', '未知')
-            url = p['key_parameters'].get('paper_url', '#')
+            url = p.get('pdf_url', '#')
+            source = "ArXiv API" if real_online_papers else "Mock Sandbox"
             print(f"| {source} | {p['year']} | [{p['title']}]({url}) | {p['authors']} | 連結 |")
 
 if __name__ == "__main__":
