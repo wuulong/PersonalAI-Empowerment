@@ -2,11 +2,11 @@
 
 在本書第十章中，我們強調了 **「直連 CLI 腳本調用大於常駐 MCP 伺服器」** 的主權優先哲學。
 
-為了讓這個哲學落地，小明在 Workspace 的 `scripts/research/` 目錄下放置了實體探勘代碼 `paper_scout.py`。每當小明需要探勘特定物理參數（如：*AR-WET bio-implants*）時，他會命令 Antigravity 直接在背景呼叫 Python 運行此腳本。
+為了讓這個哲學落地，小明在 Workspace 的 `scripts/research/` 目錄下放置了實體探勘程式碼 `paper_scout.py`。每當小明需要探勘特定物理參數（如：*AR-WET bio-implants*）時，他會命令 Antigravity 直接在背景呼叫 Python 執行此腳本。
 
 ---
 
-### A. paper_scout.py 實體運行指令
+### A. paper_scout.py 實體執行指令
 
 小明只需在終端機或透過 Agent 執行：
 ```bash
@@ -25,11 +25,11 @@ python3 scripts/research/paper_scout.py --query "AR-WET bio-implants" --save-db
 
 ---
 
-### B. 離線退避與資料庫數據固化結果
+### B. 離線退避與資料庫資料固化結果
 
 這套設計保證了**「沙盒隔離環境下 100% 的執行確定性」**。當斷網或線上 API 連線受阻時，系統自動啟用內建的 `VRES Lab 虛擬壓電共振傳能` 模擬文獻集，在 SQLite 資料庫的 `papers` 表中成功寫入 3 筆高質量的虛擬學術文獻。
 
-我們可以通過簡單的 SQLite 查詢來檢查小明數據庫內實體固化的元數據：
+我們可以通過簡單的 SQLite 查詢來檢查小明資料庫內實體固化的元資料：
 
 ```sql
 SELECT paper_id, title, json_extract(key_parameters, '$.Q') AS Quality_Factor FROM papers;
@@ -42,4 +42,4 @@ SELECT paper_id, title, json_extract(key_parameters, '$.Q') AS Quality_Factor FR
 | `mock_arwet_2` | Non-linear Duffing Resonator for Biomedical Ultrasonic Telemetry | 8500 |
 | `mock_arwet_3` | Multi-layer Piezoelectric Stack Optimization in Dissipative Media | 15000 |
 
-小明將這些實體代碼與資料庫同步放入了書本的 [data/research/](file:///Users/wuulong/github/bmad-pa/events/AIBooks/PersonalEmpowerment/PersonalAI-Empowerment/data/research/) 目錄中，讀者可直接使用 DBeaver 打開，即刻感受這份被實體固化的物理證據！
+小明將這些實體程式碼與資料庫同步放入了書本的 [data/research/](file:///Users/wuulong/github/bmad-pa/events/AIBooks/PersonalEmpowerment/PersonalAI-Empowerment/data/research/) 目錄中，讀者可直接使用 DBeaver 打開，即刻感受這份被實體固化的物理證據！

@@ -1,7 +1,7 @@
 # 個人賦能 (Personal Empowerment)
 ## AI 時代的架構師進化史：從工具人到「雙核共生」的覺醒之路
 
-**當前版本**：[v1.1.0](VERSION.md) (2026-05-20)
+**當前版本**：[v1.2.0](VERSION.md) (2026-05-21)
 
 > 「這不是一本由 AI 代寫的漂亮廢話，這是一場橫跨三年的數位考古實驗，每一句話都對齊真實的對話地層。」
 
@@ -40,10 +40,12 @@
 
 本書專案不只是書稿，本身就是一個**「活體可運行的 Agentic 主權開發沙盒」**，讀者克隆專案即可立刻獲得：
 
-- **💾 12KB 虛擬學術真值資料庫** ([data/research/Research_Artifacts.db](data/research/Research_Artifacts.db))：
-  內建 3 筆 AR-WET 高頻壓電傳能的動態 JSON 參數元數據與 Reviewer 2 關注的物理脆弱點數據，開箱即可用 SQL 進行跨文獻參數篩選對比。
+- **💾 三層十表聯邦主權資料庫** ([data/research/Research_Artifacts.db](data/research/Research_Artifacts.db))：
+  內建專案定錨、有向演化主題、抽象根路徑解耦（環境無涉移植）、12V 高驅動下真實 `23.47%` 非線性 Duffing 偏離實測資料、以及 PLL 動態電路補償的紅軍 PASS 攻防鐵證，提供完整的學術數位基因鏈。
+- **📄 學術主權與資料庫實踐指南** ([scripts/research/Sovereign_Research_Database_Guide.md](scripts/research/Sovereign_Research_Database_Guide.md))：
+  完整拆解 Ingestion, Calibration, Critique, Writing 四大黃金工序，內含指導教授專用進度與強度 SQL 檢核照妖鏡；嵌入動態 Mermaid 互動共生流程圖與 Mermaid Live Editor 線上開啟直連 Link。
 - **🐍 零第三方套件依賴 CLI 探勘腳本** ([scripts/research/paper_scout.py](scripts/research/paper_scout.py))：
-  完整的 Python CLI 學術探勘代碼，內建沙盒環境防禦性離線模擬降級避退（Offline Mock Mode）。
+  具備相對路徑自動化還原、多重格式 URL 下載關聯、與模擬離線降級避退（Offline Mock Mode）的 Python CLI 腳本。
 - **📄 可移植的學術導航員 Skill 技能檔** ([skills/academic-research-navigator/SKILL.md](skills/academic-research-navigator/SKILL.md))：
   寫入全套「防止學生認知掏空與思維空洞化之認知守衛協定」的 Agentic Sophisticated 技能規範。
 
@@ -75,4 +77,4 @@
 ---
 **Author**: 哈爸  
 **Era**: Antigravity / Agentic Age  
-**Status**: v1.1 Completed (2026-05-20)
+**Status**: v1.2 Completed (2026-05-21)

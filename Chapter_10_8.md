@@ -14,18 +14,18 @@
 
 ### 🛡️ 進階升級：CLI 優先直連調用與離線避退哲學 (CLI-over-MCP & Offline Fallback)
 
-雖然 MCP 常駐守護進程能提供通用的整合能力，但在極致的硬核研究場景中，**「直連 CLI 腳本調用」**才是速度與主權的終極追求。這也是領主在實戰中建立的關鍵武裝：
+雖然 MCP 常駐守護進程能提供通用的整合能力，但在極致的硬核研究場景中，**「直連 CLI 腳本調用」**才是速度與主權的終極追求。這也是領主在實戰中建立的關鍵裝備：
 
 1.  **直連 CLI 的強大優勢**：
     *   **零通訊開銷**：省去 MCP 通訊協議（JSON-RPC Over Stdio）的包裝與監聽，直接賦予 Agent 執行背景 `python3` 的權限，達到毫秒級極速回應與熱除錯。
-    *   **範例腳本**：`/scripts/research/paper_scout.py`（完整情境與實戰代碼解析請參見 **第 14 章 14.3 節** 的學術研究情境展開）。
+    *   **範例腳本**：`/scripts/research/paper_scout.py`（完整情境與實戰程式碼解析請參見 **第 14 章 14.3 節** 的學術研究情境展開）。
         當領主需要探勘新領域論文時，Agent 不需通過第三方服務，直接直呼此腳本對線上 API 進行語義探勘與 SQLite 落庫。
 2.  **防禦性降級與沙盒避退（Offline Mock Mode）**：
     *   網路是不穩定的，特別是在高度受限的沙盒或飛行中（Offline）。
     *   **退避機制**：我們在 `paper_scout.py` 中內建了防禦性避退。一旦偵測到網路 Timeout 或 429 限制，工具會優雅退化為**【本地離線模擬模式 (Offline Mock Mode)】**，利用內建的 `AR-WET` 偽文獻測試資料集完成落庫，確保 Agent 的推理鏈與 Grounding 流程 100% 不中斷。
 
-3.  **實體代碼實錄：Sovereign Paper Scout（極簡版）**：
-    為了讓領主能立即在終端機開火，以下是書中提供的極簡版、**「零第三方套件依賴 (Zero Dependency)」** 的 Python CLI 直連腳本。讀者只需將其存為 `paper_scout_mini.py`，即可一鍵完成「API 探勘 ➔ 離線模擬避退 ➔ SQLite JSON 數據落庫」的完整閉環：
+3.  **實體程式碼實錄：Sovereign Paper Scout（極簡版）**：
+    為了讓領主能立即在終端機開火，以下是書中提供的極簡版、**「零第三方套件依賴 (Zero Dependency)」** 的 Python CLI 直連腳本。讀者只需將其存為 `paper_scout_mini.py`，即可一鍵完成「API 探勘 ➔ 離線模擬避退 ➔ SQLite JSON 資料落庫」的完整閉環：
 
 ```python
 import sqlite3, json, urllib.request, urllib.parse

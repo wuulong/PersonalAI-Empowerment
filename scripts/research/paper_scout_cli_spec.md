@@ -45,14 +45,14 @@ graph LR
 ### 場景 B：學術成果落庫沉澱 (DB Ingestion Mode)
 當學生或 Agent 找到確定有參考價值的關鍵文獻時，應呼叫腳本直接將其結構化寫入資料庫：
 *   **指令**：`python3 /Users/wuulong/github/bmad-pa/scripts/research/paper_scout.py --query "Mindlin plate theory quartz" --limit 2 --save-db`
-*   **效果**：自動拉取元數據，對齊 Schema 後寫入 `/Users/wuulong/github/bmad-pa/data/research/Research_Artifacts.db` 的 `papers` 表中。
+*   **效果**：自動拉取元資料，對齊 Schema 後寫入 `/Users/wuulong/github/bmad-pa/data/research/Research_Artifacts.db` 的 `papers` 表中。
 
-### 場景 C：本地研究數據唯讀分析 (Analytics Mode)
+### 場景 C：本地研究資料唯讀分析 (Analytics Mode)
 Antigravity 可以直接使用 SQLite CLI 對落庫的論文進行高維度 SQL 查詢與比對：
 *   **指令**：`sqlite3 /Users/wuulong/github/bmad-pa/data/research/Research_Artifacts.db "SELECT paper_id, title FROM papers WHERE year >= 2025"`
 
 ---
 
 ## 4. 沙盒退避與開發除錯 (Debug & Sandbox Fallback)
-*   **自動 fallback 機制**：若網路 API 連線逾時（Timeout）或回報 429，腳本會自動在終端機打印 `⚠️ 偵測到網路連線受阻...自動啟動【本地離線模擬模式】`，並生成結構完全合致的 QMEMS 測試文獻寫入資料庫。
+*   **自動 fallback 機制**：若網路 API 連線逾時（Timeout）或回報 429，腳本會自動在終端機打印 `⚠️ 偵測到網路連線受阻...自動啟動【本地離線模擬模式】`，並產出結構完全合致的 QMEMS 測試文獻寫入資料庫。
 *   **除錯優勢**：在 Antigravity 執行時，若發現 Schema 異動，可以直接使用 `replace_file_content` 工具修改 `paper_scout.py` 中的 `save_to_sqlite` 函數，無須重新啟動或重載 MCP 伺服器，具備「即時熱修復」之極致敏捷性。

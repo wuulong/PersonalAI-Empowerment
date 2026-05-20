@@ -65,10 +65,10 @@
 
 1.  **意圖與物理美學的對位**：
     領主不需親手撰寫複雜的偏微分方程求解器，而是定義系統邊界：
-    *   **定義數據契約 (JSON Schema)**：要求系統將論文中的 `key_parameters`（頻率 $f_0$, 品質因子 $Q$, 插入損耗 $IL$）與 `critique_score`（Duffing 非線性分歧漏洞）提取為高維度 NoSQL 格式。
+    *   **定義資料契約 (JSON Schema)**：要求系統將論文中的 `key_parameters`（頻率 $f_0$, 品質因子 $Q$, 插入損耗 $IL$）與 `critique_score`（Duffing 非線性分歧漏洞）提取為高維度 NoSQL 格式。
     *   **意圖描述**：`「請為我撰寫 parse_paper_to_db.py。其職掌為讀取 Marker 轉出的 LaTeX Markdown 論文，將電路與壓電物理參數精確對位到我們定義的 JSON schema 中，並在遭遇 Duffing 非線性分歧時，自動判定為 Reviewer 2 關注的物理漏洞。」`
 2.  **氣場調校與品位裁決**：
-    當 Agent 產出代碼後，領主不去看 C 語言或 Python 的迴圈寫法，而是行使**品位裁決**：
+    當 Agent 產出程式碼後，領主不去看 C 語言或 Python 的迴圈寫法，而是行使**品位裁決**：
     *   `「這個 JSON Schema 的 key_parameters 漏掉了 TCF (溫度係數) 參數，對於植入式生醫元件來說，體溫波動是關鍵。請立刻在 Table 的 meta_data 信封中，注入向前相容的體溫補償機制。」`
 3.  **成果**：
     這套**「軟體定義地圖 / 軟體定義物理 (Software Defined Physics)」**的實踐，讓領主能用極高維的語言（Vibe）統御極為底層、複雜的電磁物理模擬腳本，這正是 Vibe Coding 在硬核科學研究上的奇點！

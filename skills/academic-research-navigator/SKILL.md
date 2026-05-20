@@ -1,6 +1,6 @@
 ---
 name: academic-research-navigator
-description: 專注於新一代學術研究「硬核兵器庫」，支援線上文獻檢索、SQLite 結構化數據落庫、LaTeX 公式處理與紅軍自審評估。
+description: 專注於新一代學術研究「硬核兵器庫」，支援線上文獻檢索、SQLite 結構化資料落庫、LaTeX 公式處理與紅軍自審評估。
 ---
 
 # Academic Research Navigator Skill (學術研究導航員技能)
@@ -28,7 +28,7 @@ description: 專注於新一代學術研究「硬核兵器庫」，支援線上�
 python3 /Users/wuulong/github/bmad-pa/scripts/research/paper_scout.py --query "<關鍵字>" --limit <數量> --save-db
 ```
 
-*   **沙盒降級處理**：若執行時遭遇網路連線阻礙（Timeout 或 429），腳本會自動退避至【離線模擬模式 (Offline Mock Mode)】生成高度自洽的 AR-WET 測試資料並完成落庫，Agent 應直接以此數據進行後續推理與 Grounding。
+*   **沙盒降級處理**：若執行時遭遇網路連線阻礙（Timeout 或 429），腳本會自動退避至【離線模擬模式 (Offline Mock Mode)】產出高度自洽的 AR-WET 測試資料並完成落庫，Agent 應直接以此資料進行後續推理與 Grounding。
 *   **成果彙報**：在對話中直接為使用者渲染出高品質的 Markdown 對照表，並提醒文獻已寫入 `Research_Artifacts.db`。
 
 ### 📌 工作流 B：非結構化 LaTeX 論文之紅軍自審落庫 (Adversarial Extraction)

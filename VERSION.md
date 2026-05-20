@@ -2,15 +2,28 @@
 
 本檔案紀錄《個人賦能》書稿之版本演進與重大更新說明。
 
+## [v1.2.0] - 2026-05-21
+### 🚀 達成里程碑 - 三層聯邦主權星系架構與導師 SQL 盲檢大改版
+- **三層十表 Schema 部署**：正式廢除單表結構，升級為 10 表聯邦主權架構，徹底理清 Ingestion、Grounding、Execution 與 Evolution 的實體關係。
+- **路徑解耦與跨裝置移植**：引入 `directory_roots` 與 `paper_urls`，解耦實體絕對路徑，實現實驗室 NAS 與個人 macOS 路徑 100% 機動映射。
+- **現地真值誤差比對**：資料庫實體固化 12V 高激勵壓電 `23.47%` Duffing 非線性失匹配偏離與 PLL 動態防禦自審鐵證。
+- **書籍手稿 Chapter 14 滿血升級**：
+  - 更新 `Chapter_14_2.md` 以映射新版 DDL 及學術生命週期。
+  - 更新 `Chapter_14_5.md` 增寫「張教授的 30 秒 SQL 照妖鏡」以實行資料庫盲檢，並改寫 Dialog Playback 師徒攻防。
+
+### ✨ 新增章節與實體資產
+- **`scripts/research/Sovereign_Research_Database_Guide.md`**: 全新硬核學術主權手冊，附帶四大導師稽核 SQL，並嵌入可互動之 Mermaid 流程圖與 Live Editor 連動連結。
+- **`data/research/Research_Artifacts.db`**: 重建 100% 純中文壓電傳能（AR-WET）高質量關係型實體資料庫。
+
 ## [v1.1.0] - 2026-05-20
-### 🚀 達成里程碑 - 學術導航員與情境展開全面武裝
+### 🚀 達成里程碑 - 學術導航員與情境展開全面裝備
 - **新增第 14 章情境展開**：正式增設 **「第 14 章：情境展開 —— 主權研究者的自我革命」**，將五階段演化梯融會貫通於壓電聲學無線傳能（AR-WET）的電機學術研究實戰中。
-- **跨章節引用對位**：在第 10、11、12、13 章中注入指向第 14 章的網絡化引用 Hooks，提升書稿的整體學術與系統架構美感。
-- **物理資產與代碼開源**：將實體 CLI 調用腳本、SQLite 預建真值資料庫、以及 Skill 技能定義檔全面同步複製入書本的開源倉庫中。
+- **跨章節引用對位**：在第 10、11、12、13 章中注入指向第 14 章的網路化引用 Hooks，提升書稿的整體學術與系統架構美感。
+- **物理資產與程式碼開源**：將實體 CLI 調用腳本、SQLite 預建真值資料庫、以及 Skill 技能定義檔全面同步複製入書本的開源倉庫中。
 
 ### ✨ 新增章節與實體資產
 - **Chapter 14 (14.0 - 14.6)**: 涵蓋學術自我掏空痛點、SQLite 混合欄位設計、paper_scout CLI 探勘、學術導航員 Skill 封裝、以及指導教授「三層治理面試演練」。
-- **`data/research/Research_Artifacts.db`**: 克隆即用、12KB 的虛擬學術研究預建 SQLite 真值資料庫（內建 3 筆 AR-WET 物理元數據與紅軍 vulnerability 數據）。
+- **`data/research/Research_Artifacts.db`**: 克隆即用、12KB 的虛擬學術研究預建 SQLite 真值資料庫（內建 3 筆 AR-WET 物理元資料與紅軍 vulnerability 資料）。
 - **`scripts/research/paper_scout.py`**: 完整的雙源學術 API 探勘與沙盒離線退避 Python CLI 腳本；在 `Ch 10.8` 中加印 distilled 的 Python 極簡版原始碼。
 - **`skills/academic-research-navigator/SKILL.md`**: 可移植的 Agent 裝備化技能定義檔，內置極硬核「防止學生思維空洞化之認知守衛協定」。
 
