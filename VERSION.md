@@ -2,6 +2,13 @@
 
 本檔案紀錄《個人賦能》書稿之版本演進與重大更新說明。
 
+## [v1.2.1] - 2026-05-21
+### 🚀 達成里程碑 - Zotero 雙核共生直連與雙向回流工具鏈升級
+- **Zotero 直連同步方法論**：確立 Zotero（物理文獻入口）與 SQLite（思想心智中樞）的「單向唯讀投影、雙核共生」分工。
+- **Zotero 大量遷移獨立腳本**：新增 `migrate_zotero_bib.py`，支援 Better BibTeX 批次匯入，預置 AI 協同改寫 Prompt。
+- **主權文獻回流工具與手冊**：新增 `export_selected_bib.py` 與 `Zotero_Feedback_Guide.md`，支援 Zotero 魔術棒與 BIB 匯出一鍵安全回流 Zotero。
+- **三層學術偵察引擎藍圖**：撰寫 `Academic_Recon_Engine_Blueprint.md`，規劃 arXiv + Semantic Scholar + OpenAlex 的重型文獻情報偵察母艦。
+
 ## [v1.2.0] - 2026-05-21
 ### 🚀 達成里程碑 - 三層聯邦主權星系架構與導師 SQL 盲檢大改版
 - **三層十表 Schema 部署**：正式廢除單表結構，升級為 10 表聯邦主權架構，徹底理清 Ingestion、Grounding、Execution 與 Evolution 的實體關係。

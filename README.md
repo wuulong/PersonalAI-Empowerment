@@ -46,6 +46,10 @@
   完整拆解 Ingestion, Calibration, Critique, Writing 四大黃金工序，內含指導教授專用進度與強度 SQL 檢核照妖鏡；嵌入動態 Mermaid 互動共生流程圖與 Mermaid Live Editor 線上開啟直連 Link。
 - **📄 個人學術主權資料庫延伸與實戰指南** ([scripts/research/Personal_Extension_Guide.md](scripts/research/Personal_Extension_Guide.md))：
   手把手引導讀者如何跳脫教學沙盒、開闢個人真實學術資料庫、進行裝置相對路徑映射（Directory Roots）、導入實測 COMSOL/Python 物理數據，並建立自我思維紅軍防禦體系。
+- **📄 三層學術情報偵察引擎與 Zotero MCP 整合藍圖** ([scripts/research/Academic_Recon_Engine_Blueprint.md](scripts/research/Academic_Recon_Engine_Blueprint.md))：
+  完整規劃如何透過 Zotero MCP Server 實現雙核共生同步，並導入 Semantic Scholar 與 OpenAlex API 實現具備「語義分類、變數抽取、引用圖譜追蹤」的重型學術情報雷達。
+- **📄 主權篩選文獻回流 Zotero 實戰指引** ([scripts/research/Zotero_Feedback_Guide.md](scripts/research/Zotero_Feedback_Guide.md))：
+  詳述如何將主權資料庫篩選的精華文獻，透過 Zotero 原生魔術棒識別碼或 BibTeX 批次匯出腳本安全回流 Zotero，實現物理文獻下載與思想邏輯大腦的雙核閉環。
 - **🐍 零第三方套件依賴 CLI 探勘腳本** ([scripts/research/paper_scout.py](scripts/research/paper_scout.py))：
   具備相對路徑自動化還原、多重格式 URL 下載關聯、與模擬離線降級避退（Offline Mock Mode）的 Python CLI 腳本。
 - **📄 可移植的學術導航員 Skill 技能檔** ([skills/academic-research-navigator/SKILL.md](skills/academic-research-navigator/SKILL.md))：

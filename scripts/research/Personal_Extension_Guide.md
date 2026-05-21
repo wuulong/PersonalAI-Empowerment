@@ -227,4 +227,41 @@ JOIN papers p ON r.paper_id = p.paper_id
 WHERE r.verdict = 'PASS';
 ```
 
+---
+
+## 🛠️ 九、 兵器庫的重型化躍遷：引進 MCP 與重型學術資料庫 (Advanced Heavy Weaponry)
+
+目前內建的 `paper_scout.py` 在寫作本書的脈絡下，特意採用了 **「零第三方套件依賴 (Zero-dependency)」** 的極簡設計，這是為了確保全體讀者克隆即可秒級運行，提供一個「格律化的最小展示單元」。
+
+然而，當您從「學習展示」走向「真實重型物理研究現場」時，僅靠 ArXiv API 確實會顯得「火力單薄」（因為 arXiv 僅有 Preprint 預印本，且搜尋機制較為原始）。
+
+> 💡 **進階架構設計圖紙**：關於這套重型情報武器的完整架構、Zotero MCP 雙向同步細節與四階段落地時程，請直接參閱獨立的架構藍圖：**[三層學術情報偵察引擎與 Zotero MCP 整合藍圖 (Academic_Recon_Engine_Blueprint.md)](Academic_Recon_Engine_Blueprint.md)**。
+
+若要建立全功能的「重型學術巡洋艦」，我們強烈建議研究生向以下兩個方向進行「兵器庫重裝升級」：
+
+### 1. 📡 部署 MCP 學術伺服器 (Model Context Protocol) ──「代理人直連學術感官」
+MCP（模型上下文協定）是 AI 代理人的「主動感官」。您可以直接為您的 Agentic 框架（如 Antigravity, Claude Desktop OS）配置以下學術 MCP 伺服器：
+
+*   **arXiv MCP Server**：讓您的 Agent 直接調用 arXiv 的高級 API，自動抓取 LaTeX 源代碼中的數學公式、下載 PDF 並儲存到解耦的 `directory_roots` 目錄中。
+*   **Zotero MCP Server（極致核武器）**：
+    - **原理**：這能讓 Agent 直接具備「讀寫 Zotero SQLite 本地數據庫」的權限！
+    - **場景**：當 Agent 在線上找到新論文時，它不只寫入您的主權資料庫，還會**直接遠端操縱您的 Zotero App**，自動建立資料夾、下載文獻、抓取 Metadata 並打上 tag，實現主權資料庫與 Zotero 的**雙向自動同步 (Bidirectional Sync)**！
+*   **NCBI/PubMed MCP Server**：對於生物醫學、基因工程或化學材料等領域，讓 AI 直接擁有檢索 NCBI Entrez 資料庫的特種超能力。
+
+### 2. 🔌 整合外部重型學術 API ──「他山之石的深度覆蓋」
+如果研究生要改寫 `paper_scout.py`，可以直接引進以下業界重型學術資料庫 API：
+
+*   **Semantic Scholar API（強烈推薦）**：
+    - **優勢**：這是對 AI 代理人最友善、且資料含金量極高的免費 API。
+    - **升級維度**：它能提供**引用次數 (Citation Count)**、**高影響力引用 (Highly Influential Citations)**，以及最重要的 **引用關係圖譜 (Citation Graph)**。您可以在 `papers` 寫入時，將「引用次數」與「被哪些重要論文引用」自動記錄至 meta_data，讓 AI 代理人自動繪製研究的演化鏈。
+*   **OpenAlex API / Crossref API**：
+    - **優勢**：當今全球最大的開源學術知識圖譜，涵蓋數億條學術出版紀錄。
+    - **升級維度**：超越 ArXiv 的侷限，全面覆蓋 **Nature、Science、IEEE、Elsevier、ACM** 等頂級期刊的正式出版文獻，支援 DOI 反查，自動拉取最權威的正式 metadata 落庫。
+
+---
+
+透過這套「MCP 協定 + 聯邦學術 API」的重型化升級，研究生的小明與指導教授的張教授將不再是手持木劍的學徒，而是真正擁有了**直連人類學術知識星系、能進行語義向量检索與心智基因追溯的「學術戰列巡洋艦」**！
+
+---
+
 透過這套機制，您不僅擁有了一個**絕對不會遺忘、隨時能隨主機遷移的「數位大腦」**，更能以無懈可擊的結構化證據，奪回您在學術界與研究現場的最高主權！
