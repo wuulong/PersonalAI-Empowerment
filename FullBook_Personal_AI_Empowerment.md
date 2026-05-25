@@ -1,6 +1,6 @@
 # 《個人賦能》完整全書
 
-> 本文件由自動化腳本合併而成，產生時間：2026-05-21 07:23:10
+> 本文件由自動化腳本合併而成，產生時間：2026-05-25 09:37:40
 
 ---
 
@@ -5560,7 +5560,7 @@ BMAD-PA 的設計核心是一位名為「韋小寶」的協調員，他的任務
 
 這個在本地執行的 `Research_Artifacts.db` 資料庫，其 Schema 欄位是小明研究方法論的**「數位孿生體 (Digital Twin)」**。它不再是簡單的文獻堆疊，而是將**「他者背景理論 (Grounding)」**、**「肉身本地實驗 (Execution)」**、**「認知紅軍防禦 (Critique)」**與**「主權手稿演化 (Evolution)」**進行強烈關聯的立體星系。
 
-在三層聯邦主權架構下，資料庫被解耦為十個關係緊密的實體表：
+在三層聯邦主權架構下，資料庫被解耦為十一個關係緊密的實體表：
 
 ```sql
 -- 1. 探採任務表：記錄每一次 Ingestion 探針的數位血統
@@ -5611,7 +5611,18 @@ CREATE TABLE IF NOT EXISTS papers (
     FOREIGN KEY (topic_id) REFERENCES topics(topic_id)
 );
 
--- 6. 多重資源映射表：解耦實體檔案路徑，實現「抽象 Root Key + 相對路徑」儲存
+-- 6. 新增：背景文獻交叉關係演化表 (v1.2.2 升級)
+CREATE TABLE IF NOT EXISTS paper_relations (
+    relation_id TEXT PRIMARY KEY,
+    source_paper_id TEXT NOT NULL,       -- 起點文獻 (新文獻)
+    target_paper_id TEXT NOT NULL,       -- 目標文獻 (被繼承或被批判之舊文獻)
+    relation_type TEXT NOT NULL,         -- 關係類型：'IMPROVES' (改進) | 'REFUTES' (反駁) | 'GROUNDED_ON' (基於)
+    description TEXT,                    -- 關係心智描述 (如 '將 Seong 線性模型改進為高頻非線性匹配')
+    FOREIGN KEY (source_paper_id) REFERENCES papers(paper_id),
+    FOREIGN KEY (target_paper_id) REFERENCES papers(paper_id)
+);
+
+-- 7. 多重資源映射表：解耦實體檔案路徑，實現「抽象 Root Key + 相對路徑」儲存
 CREATE TABLE IF NOT EXISTS paper_urls (
     url_id TEXT PRIMARY KEY,
     paper_id TEXT NOT NULL,
@@ -5623,28 +5634,31 @@ CREATE TABLE IF NOT EXISTS paper_urls (
     FOREIGN KEY (root_key) REFERENCES directory_roots(root_key)
 );
 
--- 7. 本地模擬實測表：固化研究生肉身實踐的物理數值，與文獻理論精準對照
+-- 8. 本地模擬實測表：固化研究生肉身實踐的物理數值，與文獻理論精準對照
 CREATE TABLE IF NOT EXISTS local_simulations (
     sim_id TEXT PRIMARY KEY,
     paper_id TEXT NOT NULL,
     run_config TEXT NOT NULL,          -- JSON 本次模擬輸入參數 {"drive_voltage": 5.0}
     empirical_results TEXT,            -- JSON 本地實測結果 {"measured_Q": 11800}
     discrepancy_percentage REAL,       -- 【主權比對指標】本地與文獻理論誤差百分比
+    artifact_visual_path TEXT,          -- 【主權多模態】實測波形圖/熱分佈圖相對路徑 (v1.2.2 升級)
     FOREIGN KEY (paper_id) REFERENCES papers(paper_id)
 );
 
--- 8. 紅軍自審對抗表：記錄師徒或 Agent 自審防禦軌跡，行使「品位裁決」的鐵證
+-- 9. 紅軍自審對抗表：記錄師徒或 Agent自審防禦軌跡，行使「品位裁決」的鐵證
 CREATE TABLE IF NOT EXISTS red_team_logs (
     log_id TEXT PRIMARY KEY,
     paper_id TEXT NOT NULL,
+    manuscript_id TEXT,                 -- 關聯至手稿，直接對研究生自己的論文設計發動對抗 (v1.2.2 升級)
     aspect_analyzed TEXT,              -- 分析物理維度 (如 'Duffing Non-linear')
     reviewer_attack TEXT,              -- 紅軍 Agent (尖銳物理質疑)
     student_defense TEXT,              -- 研究生 (主動防禦公式與設計規避)
     verdict TEXT NOT NULL,             -- 裁決判定：PASS | VULNERABLE
-    FOREIGN KEY (paper_id) REFERENCES papers(paper_id)
+    FOREIGN KEY (paper_id) REFERENCES papers(paper_id),
+    FOREIGN KEY (manuscript_id) REFERENCES my_manuscripts(manuscript_id)
 );
 
--- 9. 主權手稿有向演化表：記錄論文寫作的基因繼承，手稿不再是孤島
+-- 10. 主權手稿有向演化表：記錄論文寫作的基因繼承，手稿不再是孤島
 CREATE TABLE IF NOT EXISTS my_manuscripts (
     manuscript_id TEXT PRIMARY KEY,
     topic_id TEXT NOT NULL,
@@ -5657,7 +5671,7 @@ CREATE TABLE IF NOT EXISTS my_manuscripts (
     FOREIGN KEY (previous_manuscript_id) REFERENCES my_manuscripts(manuscript_id)
 );
 
--- 10. 手稿引用脈絡表：記錄「我為什麼要在我的這篇草稿中引用這篇背景文獻」
+-- 11. 手稿引用脈絡表：記錄「我為什麼要在我的這篇草稿中引用這篇背景文獻」
 CREATE TABLE IF NOT EXISTS manuscript_citations (
     manuscript_id TEXT NOT NULL,
     paper_id TEXT NOT NULL,
@@ -5670,16 +5684,17 @@ CREATE TABLE IF NOT EXISTS manuscript_citations (
 
 #### 💡 欄位與研究環節的立體映射證明：
 *   **`projects` 與 `topics`（對齊環節：文獻回顧與問題定義）**：
-    小明不再是被動地讀論文，而是首先在 `projects` 定義其核心目標頻率（如 `28.5 MHz`），並在 `topics` 設定 sequence_order，強制規劃從「物理建模」到「Duffing補償」的循序推進。這構成了小明的戰略定錨。
-*   **`local_simulations.discrepancy_percentage`（對齊環節：資料蒐集與實驗執行）**：
-    當小明完成本地 COMSOL 模擬後，直接與 `papers` 儲存的文獻理論值進行 SQL `JOIN` 比對。例如小明發現當激勵電壓提升至 12V 時，本地 Q 值與理論值偏離高達 `23.47%`。**這個誤差，就是發現 Duffing 非線性分歧的起點，也是科學研究最硬核的含金量**。
-*   **`red_team_logs`（對齊環節：研究假設擬定與自審）**：
-    強制記錄 AI 審稿人對此誤差發動的尖銳物理質疑，與小明主動設計「相位鎖定電路（PLL）與電壓避退機制」的防禦過程。這行使了高品位的物理裁決，保留了思維並未被 AI 掏空的鐵證。
+    小明不再是被動地讀論文，而是首先在 `projects` 定義其核心目標頻率（如 `28.5 MHz`），並在 `topics` 設定 sequence_order，強制規劃從「物理建模」到「Duffing匹配」的循序推進。這構成了小明的戰略定錨。
+*   **`paper_relations`（對齊環節：文獻交叉譜系與 Gap 分析）**：
+    新增的關係表讓小明能透過 SQL 遞迴查詢（Recursive CTE），秒級理清 50 篇背景文獻之間的繼承與批判脈絡（例如：Seong2026 是基於 Kim2024 做非線性匹配，但被 Park2027 指出漏掉阻尼分歧），一鍵畫出領域的「學術演化譜系圖」，精準定位研究空白。
+*   **`local_simulations.discrepancy_percentage` 與 `artifact_visual_path`（對齊環節：資料蒐集與聯覺品位裁決）**：
+    當小明完成本地 COMSOL 模擬後，直接與 `papers` 儲存的文獻理論值進行 SQL `JOIN` 比對。小明發現誤差偏離高達 `23.47%`（臨界點），並且可透過新增的 `artifact_visual_path` 直接彈出本地實測波形對比圖，供教授行使最直觀的「聯覺品位判讀」。
+*   **`red_team_logs.manuscript_id`（對齊環節：研究假設擬定與手稿紅軍防禦）**：
+    外鍵升級後，紅軍 Agent 不僅審計背景文獻，更被允許直接對研究生小明**自己撰寫的論文手稿設計（`my_manuscripts`）**發動尖銳的 Reviewer 質疑。小明在資料庫中記錄自審防禦軌跡，這行使了高品位的物理防禦，保留了思維大腦並未被 AI 掏空的鐵證。
 *   **`my_manuscripts`（對齊環節：手稿撰寫與演化傳承）**：
     透過 `previous_manuscript_id` 自關聯，記錄自己的會議論文是如何一步步演化出期刊論文。手稿不再是孤島，而是承載了前人與自我心智基因的演化鏈。
 *   **`paper_urls` 與 `directory_roots`（對齊環節：學術資產繼承）**：
     藉由剝除實體絕對路徑，使資料庫具備完美跨電腦可移植性，保障實驗室共享 NAS 資產的永續可用。
-
 
 
 
@@ -5819,7 +5834,7 @@ version: 1.1
 
 ### 第三層：技能裝備化（Skillification）驗收 —— 驗證實驗室的「知識遺傳」
 
-*   **檢核動作**：在學期末或小明畢業前，張教授親自驗收小明沉澱在 [skills/academic-research-navigator/](file:///Users/wuulong/github/bmad-pa/events/AIBooks/PersonalEmpowerment/PersonalAI-Empowerment/skills/academic-research-navigator/) 下的 Skill 裝備與 `Research_Artifacts.db` 的落庫狀態。
+*   **檢核動作**：在學期末或小明畢業前，張教授親自驗收小明沉澱在 [skills/academic-research-navigator/](file:///Users/wuulong/github/bmad-pa/events/AIBooks/PersonalEmpowerment/PersonalAI-Empowerment/skills/academic-research-navigator/) 下 of Skill 裝備與 `Research_Artifacts.db` 的落庫狀態。
 *   **判定標準**：剛進實驗室的新人小華，是否能在一鍵載入 `academic-research-navigator` 技能後，立刻調用小明留下的資料處理與文獻查詢流程，並且在 `Research_Artifacts.db` 中秒級比對學長當年留下的真實參數。
 *   **教授面試提問**：`「你這學期為我們實驗室的『共有大腦』留下了什麼正規軍裝備（Skill）？還是你只拍拍屁股留下一堆無人能懂的聊天對話垃圾？」`
 
@@ -5866,20 +5881,21 @@ WHERE s.discrepancy_percentage > 10.0;
 ```
 *   **治理判讀**：如果列表中出現如 `sim_run_2` 在 12V 高驅動下與理論偏離達 `23.47%` 的資料，這證明小明**成功捕捉到了壓電材料的高驅動非線性 Duffing 分歧臨界失效點**！這是一個極具學術價值的重大發現，也是博士論文的完美突破口。反之，如果小明所有模擬的誤差都是完美的 `0%`，則說明他只是在做無意義的線性驗證，甚至有**資料捏造（Data Fitting）**的嫌疑。
 
-##### 🔍 檢核三：思維主權與品位裁決（審查大腦是否被 AI 掏空）
-面對高電壓下的失匹配缺陷，張教授必須確認小明有沒有自主提出具備物理手感的解決方案，還是只是一味聽信 LLM 的空洞黑話。
+##### 🔍 檢核三：手稿紅軍防禦與品位裁決（審查大腦是否被 AI 掏空 - v1.2.2 升級）
+張教授不只審查背景文獻，更要確認小明在**自己撰寫的論文手稿（`m_001`）中**，面對高電壓下的失匹配缺陷，有沒有自主提出具備物理手感的解決方案，還是只是一味聽信 LLM 的空洞黑話。
 
 ```sql
 SELECT 
-    p.cite_key AS 被審論文,
-    r.aspect_analyzed AS 分析維度,
+    m.title AS 我的手稿標題,
+    r.aspect_analyzed AS 質疑物理維度,
     r.reviewer_attack AS 紅軍審稿人攻勢,
     r.student_defense AS 學生主權防禦,
-    r.verdict AS 裁決結果
-FROM red_team_logs r
-JOIN papers p ON r.paper_id = p.paper_id;
+    r.verdict AS 裁決判定
+FROM my_manuscripts m
+JOIN red_team_logs r ON m.manuscript_id = r.manuscript_id
+WHERE m.manuscript_id = 'm_001';
 ```
-*   **治理判讀**：張教授親自閱讀 `student_defense`。如果小明登記的防禦是「引入 PLL 相位鎖定電路，並實施 8V 最高電壓退避限制」，這證明小明**成功行使了高級的品位裁決與物理電路防禦，思維主權依然存活**，通過審查！
+*   **治理判讀**：張教授親自閱讀 `student_defense`。如果小明在自己的手稿 `m_001` 登記的防禦是「引入 PLL 相位鎖定電路，並實施 8V 最高電壓退避限制」，這證明小明**成功行使了高級的品位裁決與物理電路防禦，思維主權依然存活**，通過審查！
 
 ##### 🔍 檢核四：資產繼承與跨裝置移植性（審查實驗室資產完整性）
 學生畢業離校後，留下來的資料庫是不是一堆斷線的死連結？學弟妹能不能一秒接手？
@@ -5907,7 +5923,6 @@ WHERE u.url_type = 'local_pdf';
 > AI 最早建議我忽略這個偏離、或者強行擬合（Fit）資料以維持 15000 的極限值來提高效率。但我行使了**品位裁決**，拒絕了 AI 的投機建議。因為我意識到這 `23.47%` 的偏離，正是觸發非線性 Duffing 分歧不穩定的信號。我啟動了紅軍 Agent 進行批判性質詢，並將動態 PLL 相位跟隨電路與退避電壓防禦寫入了資料庫的 `red_team_logs`。我最終決定選定 12000 作為基準，這是我在實測誤差中找到的現地真值。」
 > 
 > **張教授**（點頭微笑）：「很好，你沒有被 AI 牽著鼻子走。你從 `23.47%` 的誤差中抓到了真的物理發現，而且在資料庫留下了無可辯駁的品位防禦鐵證。這才是一個具備數位主權的研究者該有的樣子！」
-
 
 
 
