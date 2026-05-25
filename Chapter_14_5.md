@@ -24,7 +24,7 @@
 
 ### 第三層：技能裝備化（Skillification）驗收 —— 驗證實驗室的「知識遺傳」
 
-*   **檢核動作**：在學期末或小明畢業前，張教授親自驗收小明沉澱在 [skills/academic-research-navigator/](file:///Users/wuulong/github/bmad-pa/events/AIBooks/PersonalEmpowerment/PersonalAI-Empowerment/skills/academic-research-navigator/) 下的 Skill 裝備與 `Research_Artifacts.db` 的落庫狀態。
+*   **檢核動作**：在學期末或小明畢業前，張教授親自驗收小明沉澱在 [skills/academic-research-navigator/](file:///Users/wuulong/github/bmad-pa/events/AIBooks/PersonalEmpowerment/PersonalAI-Empowerment/skills/academic-research-navigator/) 下 of Skill 裝備與 `Research_Artifacts.db` 的落庫狀態。
 *   **判定標準**：剛進實驗室的新人小華，是否能在一鍵載入 `academic-research-navigator` 技能後，立刻調用小明留下的資料處理與文獻查詢流程，並且在 `Research_Artifacts.db` 中秒級比對學長當年留下的真實參數。
 *   **教授面試提問**：`「你這學期為我們實驗室的『共有大腦』留下了什麼正規軍裝備（Skill）？還是你只拍拍屁股留下一堆無人能懂的聊天對話垃圾？」`
 
@@ -71,20 +71,21 @@ WHERE s.discrepancy_percentage > 10.0;
 ```
 *   **治理判讀**：如果列表中出現如 `sim_run_2` 在 12V 高驅動下與理論偏離達 `23.47%` 的資料，這證明小明**成功捕捉到了壓電材料的高驅動非線性 Duffing 分歧臨界失效點**！這是一個極具學術價值的重大發現，也是博士論文的完美突破口。反之，如果小明所有模擬的誤差都是完美的 `0%`，則說明他只是在做無意義的線性驗證，甚至有**資料捏造（Data Fitting）**的嫌疑。
 
-##### 🔍 檢核三：思維主權與品位裁決（審查大腦是否被 AI 掏空）
-面對高電壓下的失匹配缺陷，張教授必須確認小明有沒有自主提出具備物理手感的解決方案，還是只是一味聽信 LLM 的空洞黑話。
+##### 🔍 檢核三：手稿紅軍防禦與品位裁決（審查大腦是否被 AI 掏空 - v1.2.2 升級）
+張教授不只審查背景文獻，更要確認小明在**自己撰寫的論文手稿（`m_001`）中**，面對高電壓下的失匹配缺陷，有沒有自主提出具備物理手感的解決方案，還是只是一味聽信 LLM 的空洞黑話。
 
 ```sql
 SELECT 
-    p.cite_key AS 被審論文,
-    r.aspect_analyzed AS 分析維度,
+    m.title AS 我的手稿標題,
+    r.aspect_analyzed AS 質疑物理維度,
     r.reviewer_attack AS 紅軍審稿人攻勢,
     r.student_defense AS 學生主權防禦,
-    r.verdict AS 裁決結果
-FROM red_team_logs r
-JOIN papers p ON r.paper_id = p.paper_id;
+    r.verdict AS 裁決判定
+FROM my_manuscripts m
+JOIN red_team_logs r ON m.manuscript_id = r.manuscript_id
+WHERE m.manuscript_id = 'm_001';
 ```
-*   **治理判讀**：張教授親自閱讀 `student_defense`。如果小明登記的防禦是「引入 PLL 相位鎖定電路，並實施 8V 最高電壓退避限制」，這證明小明**成功行使了高級的品位裁決與物理電路防禦，思維主權依然存活**，通過審查！
+*   **治理判讀**：張教授親自閱讀 `student_defense`。如果小明在自己的手稿 `m_001` 登記的防禦是「引入 PLL 相位鎖定電路，並實施 8V 最高電壓退避限制」，這證明小明**成功行使了高級的品位裁決與物理電路防禦，思維主權依然存活**，通過審查！
 
 ##### 🔍 檢核四：資產繼承與跨裝置移植性（審查實驗室資產完整性）
 學生畢業離校後，留下來的資料庫是不是一堆斷線的死連結？學弟妹能不能一秒接手？
@@ -112,4 +113,3 @@ WHERE u.url_type = 'local_pdf';
 > AI 最早建議我忽略這個偏離、或者強行擬合（Fit）資料以維持 15000 的極限值來提高效率。但我行使了**品位裁決**，拒絕了 AI 的投機建議。因為我意識到這 `23.47%` 的偏離，正是觸發非線性 Duffing 分歧不穩定的信號。我啟動了紅軍 Agent 進行批判性質詢，並將動態 PLL 相位跟隨電路與退避電壓防禦寫入了資料庫的 `red_team_logs`。我最終決定選定 12000 作為基準，這是我在實測誤差中找到的現地真值。」
 > 
 > **張教授**（點頭微笑）：「很好，你沒有被 AI 牽著鼻子走。你從 `23.47%` 的誤差中抓到了真的物理發現，而且在資料庫留下了無可辯駁的品位防禦鐵證。這才是一個具備數位主權的研究者該有的樣子！」
-

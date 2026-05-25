@@ -2,6 +2,15 @@
 
 本檔案紀錄《個人賦能》書稿之版本演進與重大更新說明。
 
+## [v1.2.2] - 2026-05-25
+### 🚀 達成里程碑 - 主權重裝協奏（Sovereign Orchestration）自動化閉環正式落地
+- **文獻交叉演化譜系**：新增 `paper_relations` 關係表，以 SQL 遞迴查詢秒級繪出學術演化金線。
+- **手稿紅軍防禦機制**：升級 `red_team_logs` 向上外鍵關聯 `my_manuscripts`，讓 AI 審稿人直接挑釁研究生自主假設。
+- **影子模擬多模態欄位**：於 `local_simulations` 新增 `artifact_visual_path`，支援波形與熱點圖之聯覺品位判讀。
+- **元寫作 LaTeX 骨架組裝**：規劃開發 `generate_manuscript_scaffold.py`，讀取資料庫引用心智脈絡自動組裝 LaTeX 骨架。
+- **心流考古自動落庫**：規劃開發 `harvest_flow_to_db.py`，將 Markdown 日誌中的推導手感自動 parse 存入資料庫。
+- **實體提案詳見**：[v1.2.2_Proposal_Sovereign_Orchestration.md](file:///Users/wuulong/github/bmad-pa/events/AIBooks/PersonalEmpowerment/planning/v1.2.2_Proposal_Sovereign_Orchestration.md)。
+
 ## [v1.2.1] - 2026-05-21
 ### 🚀 達成里程碑 - Zotero 雙核共生直連與雙向回流工具鏈升級
 - **Zotero 直連同步方法論**：確立 Zotero（物理文獻入口）與 SQLite（思想心智中樞）的「單向唯讀投影、雙核共生」分工。

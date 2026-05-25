@@ -1,5 +1,5 @@
 -- ==============================================================================
--- 《個人AI賦能》v1.2.0 學術研究兵器庫 - 實體資料庫結構定義檔 (schema.sql)
+-- 《個人AI賦能》v1.2.2 學術研究兵器庫 - 實體資料庫結構定義檔 (schema.sql)
 -- 
 -- 戰略設計：三層聯邦主權星系架構 (3-Tier Sovereign Knowledge Schema)
 -- 本 Schema 將「他者背景文獻（他山之石）」、「本地實測與紅軍自審（肉身實踐）」與
@@ -133,6 +133,20 @@ CREATE TABLE IF NOT EXISTS papers (
 );
 
 -- ------------------------------------------------------------------------------
+-- 資料表：paper_relations (背景文獻交叉關係演化表 - v1.2.2)
+-- 目的：追溯文獻之間的繼承與批判關係，支援 SQL 自動生成學術演化譜系圖。
+-- ------------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS paper_relations (
+    relation_id TEXT PRIMARY KEY,
+    source_paper_id TEXT NOT NULL,       -- 起點文獻 (新文獻)
+    target_paper_id TEXT NOT NULL,       -- 目標文獻 (被繼承或被批判之舊文獻)
+    relation_type TEXT NOT NULL,         -- 關係類型：'IMPROVES' (改進) | 'REFUTES' (反駁) | 'GROUNDED_ON' (基於)
+    description TEXT,                    -- 關係心智描述
+    FOREIGN KEY (source_paper_id) REFERENCES papers(paper_id),
+    FOREIGN KEY (target_paper_id) REFERENCES papers(paper_id)
+);
+
+-- ------------------------------------------------------------------------------
 -- 資料表：paper_urls (文獻多重資源關聯表 - B方案實體抽象版)
 -- 目的：支援單篇文獻掛載多重資源（官方網頁、ArXiv、本地 PDF 等）。
 -- 
@@ -191,8 +205,8 @@ CREATE TABLE IF NOT EXISTS local_simulations (
     -- 📊 【實測/模擬波形結果 JSON】：記錄本地跑出來的關鍵物理輸出
     -- 格式範例：{"measured_Q": 11800, "measured_IL_dB": 2.8}
     empirical_results TEXT, 
-    
     discrepancy_percentage REAL,          -- 【主權比對指標】：本地實測與文獻理論之間的誤差百分比 (如 1.67%)
+    artifact_visual_path TEXT,            -- 【主權多模態】實測波形圖/熱分佈圖相對路徑 (v1.2.2)
     sim_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     meta_data TEXT,                       -- JSON 信封：{"simulation_platform": "COMSOL_v6.2", "host": "Habars_Mac Studio"}
     FOREIGN KEY (paper_id) REFERENCES papers(paper_id)
@@ -205,13 +219,15 @@ CREATE TABLE IF NOT EXISTS local_simulations (
 CREATE TABLE IF NOT EXISTS red_team_logs (
     log_id TEXT PRIMARY KEY,
     paper_id TEXT NOT NULL,
+    manuscript_id TEXT,                   -- 關聯至手稿，直接對研究生自己的論文設計發動對抗 (v1.2.2)
     aspect_analyzed TEXT,                 -- 本次對抗的分析維度 (例如 'Duffing Non-linear Bifurcation')
     reviewer_attack TEXT,                 -- 紅軍 Agent (扮演嚴厲審稿人) 提出的尖銳物理質疑
     student_defense TEXT,                 -- 學生做出「品位裁決」後的防禦策略、修正公式與推導
     verdict TEXT NOT NULL,                -- 裁決判定：'PASS' (通過) | 'VULNERABLE' (脆弱) | 'CRITICAL_BUG' (嚴重錯誤)
     test_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     meta_data TEXT,                       -- JSON 信封：{"judge_model": "Gemini_3.0_Pro", "tokens_used": 1540}
-    FOREIGN KEY (paper_id) REFERENCES papers(paper_id)
+    FOREIGN KEY (paper_id) REFERENCES papers(paper_id),
+    FOREIGN KEY (manuscript_id) REFERENCES my_manuscripts(manuscript_id)
 );
 
 
