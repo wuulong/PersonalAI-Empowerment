@@ -2,6 +2,14 @@
 
 本檔案紀錄《個人賦能》書稿之版本演進與重大更新說明。
 
+## [v1.2.3] - 2026-05-25
+### 🚀 達成里程碑 - 實驗室共有大腦：主權聯邦共創閉環正式落地
+- **四層聯邦共識結構**：確立個人心流私有層（不公開）、共享定錨層、與經照妖鏡驗證之去識別化真值層，建構 Lab Master DB，保障個人思考隱私。
+- **Git-based 聯邦共創腳本**：新增 `export_contributions.py`（學生導出 JSON）與 `rebuild_lab_brain.py`（一鍵重構本機聯邦庫），徹底消滅二進位衝突。
+- **實體共創範例資產**：新增 contributions 目錄與 [contrib_matching_circuit.json](file:///Users/wuulong/github/bmad-pa/events/AIBooks/PersonalEmpowerment/PersonalAI-Empowerment/data/research/contributions/contrib_matching_circuit.json) 範例檔案，保障讀者一鍵重建大腦時的「滿配震撼體感」。
+- **防止 AI 污染與能力繼承**：設計誤差閥值過濾器與思考血統證明（Thought Lineage Signature），並推行 SOP 技能（Skills）秒級繼承，消滅學術斷代。
+- **實體提案詳見**：[v1.2.3_Proposal_Federated_Sovereign_Lab_Brain.md](file:///Users/wuulong/github/bmad-pa/events/AIBooks/PersonalEmpowerment/planning/v1.2.3_Proposal_Federated_Sovereign_Lab_Brain.md)。
+
 ## [v1.2.2] - 2026-05-25
 ### 🚀 達成里程碑 - 主權重裝協奏（Sovereign Orchestration）自動化閉環正式落地
 - **文獻交叉演化譜系**：新增 `paper_relations` 關係表，以 SQL 遞迴查詢秒級繪出學術演化金線。

@@ -1,0 +1,68 @@
+{
+  "generator": "Antigravity Academic Co-creation Exporter v1.2.3",
+  "topic_id": "matching_circuit",
+  "papers": [
+    {
+      "paper_id": "p_001",
+      "task_id": "task_2026_01",
+      "topic_id": "topic_matching_circuit",
+      "title": "Acoustic Resonant Wireless Power Transfer (AR-WET) for Biomedical Implants",
+      "authors": "J. Seong, Y. Kim",
+      "year": 2026,
+      "core_method": "Linear Piezoelectric Acoustic Transfer Modeling",
+      "cite_key": "Seong2026ARWET",
+      "bibtex": "@article{Seong2026ARWET, author={Seong, J. and Kim, Y.}, journal={IEEE Transactions on Ultrasonics}, title={Acoustic Resonant Wireless Power Transfer (AR-WET) for Biomedical Implants}, year={2026}, volume={73}, number={2}, pages={112-125}}",
+      "meta_data": {
+        "theoretical_Q": 15000,
+        "operating_frequency_MHz": 28.5,
+        "drive_voltage_limit": 8.0
+      }
+    },
+    {
+      "paper_id": "p_002",
+      "task_id": "task_2024_08",
+      "topic_id": "topic_piezo_modeling",
+      "title": "High-Frequency Piezoelectric Transducers: Principles and Modeling",
+      "authors": "T. Kim, H. Park",
+      "year": 2024,
+      "core_method": "Mason's Equivalent Circuit for Piezo-elements",
+      "cite_key": "Kim2024Piezo",
+      "bibtex": "@book{Kim2024Piezo, author={Kim, T. and Park, H.}, publisher={Academic Press}, title={High-Frequency Piezoelectric Transducers: Principles and Modeling}, year={2024}}",
+      "meta_data": {
+        "base_material": "PZT-5H",
+        "dielectric_constant": 1700
+      }
+    },
+    {
+      "paper_id": "p_003",
+      "task_id": "task_2027_03",
+      "topic_id": "topic_non_linear_matching",
+      "title": "Duffing Non-linear Bifurcation and Compensation in Acoustic Wireless Power Transfer",
+      "authors": "D. Park, S. Lee",
+      "year": 2027,
+      "core_method": "Dynamic Phase-Locked Loop (PLL) Phase Compensation",
+      "cite_key": "Park2027Duffing",
+      "bibtex": "@article{Park2027Duffing, author={Park, D. and Lee, S.}, journal={Journal of Applied Physics}, title={Duffing Non-linear Bifurcation and Compensation in Acoustic Wireless Power Transfer}, year={2027}, volume={131}, pages={450-462}}",
+      "meta_data": {
+        "nonlinear_elastic_constant": -3.2e10,
+        "bifurcation_threshold_volts": 10.5
+      }
+    }
+  ],
+  "paper_relations": [
+    {
+      "relation_id": "rel_001",
+      "source_paper_id": "p_001",
+      "target_paper_id": "p_002",
+      "relation_type": "GROUNDED_ON",
+      "description": "Seong2026 的高頻壓電傳能建模，其底層等效電路完全基於 Kim2024 的 Mason's 模型基礎理論。"
+    },
+    {
+      "relation_id": "rel_002",
+      "source_paper_id": "p_003",
+      "target_paper_id": "p_001",
+      "relation_type": "IMPROVES",
+      "description": "Park2027 改進了 Seong2026 的線性電路匹配，主動引入 Duffing 非線性彈性常數修正，解決了高壓下的分歧匹配不穩定問題。"
+    }
+  ]
+}

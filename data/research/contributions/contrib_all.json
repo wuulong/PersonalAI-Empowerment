@@ -1,0 +1,58 @@
+{
+  "generator": "Antigravity Academic Co-creation Exporter v1.2.3",
+  "topic_id": "all",
+  "papers": [
+    {
+      "paper_id": "semscholar_seong_2026",
+      "task_id": "task_init_sandbox_2026",
+      "topic_id": "top_piezo_modeling",
+      "title": "用於主動植入物之高Q值聲學共振無線能量傳輸元件設計",
+      "authors": "成鐘錫, 辛賢恩, 吳烏龍 (W. Wuulong)",
+      "year": 2026,
+      "core_method": "聲學波包限域物理優化技術 (Acoustic Wave Confinement)",
+      "cite_key": "Seong2026ARWET",
+      "bibtex": "@article{Seong2026ARWET,\n  author = {Seong, J.-S. and Shin, H.-E. and Wuulong, W.},\n  title = {Design of High-Q Acoustic-Resonant Wireless Energy Transceivers (AR-WET) for Active Bio-Implants},\n  journal = {IEEE Transactions on Biomedical Engineering},\n  year = {2026},\n  volume = {73},\n  pages = {142--155},\n  publisher = {IEEE}\n}",
+      "meta_data": {
+        "theoretical_Q": 12000,
+        "resonance_frequency_MHz": 28.5,
+        "piezo_material": "PZT-5H",
+        "citation_count": 15
+      }
+    },
+    {
+      "paper_id": "arxiv_tanaka_2024",
+      "task_id": "task_init_sandbox_2026",
+      "topic_id": "top_piezo_modeling",
+      "title": "植入式生醫微網路之聲學共振收發元件技術",
+      "authors": "田中實, 新藤健二",
+      "year": 2024,
+      "core_method": "高效率壓電薄膜微機電製程 (Piezoelectric Thin-Film MEMS)",
+      "cite_key": "Tanaka2024MEMS",
+      "bibtex": "@preprint{Tanaka2024MEMS,\n  author = {Tanaka, M. and Shindo, K.},\n  title = {Acoustic-Resonant Transceiver (AR-WET) Technology for Implantable Biomedical Micro-Networks},\n  journal = {arXiv preprint arXiv:2408.12345},\n  year = {2024}\n}",
+      "meta_data": {
+        "theoretical_Q": 8500,
+        "resonance_frequency_MHz": 24.2,
+        "piezo_material": "AlN (氮化鋁)",
+        "citation_count": 42
+      }
+    },
+    {
+      "paper_id": "semscholar_love_2025",
+      "task_id": "task_init_sandbox_2026",
+      "topic_id": "top_duffing_comp",
+      "title": "微加工共振無線換能器中之聲學能量限域分析與非線性行為",
+      "authors": "愛德華·樂芙 (A. E. H. Love), 雷蒙德·明德林 (R. D. Mindlin)",
+      "year": 2025,
+      "core_method": "厚度剪切振動彈性波解析模型 (Thickness-Shear Wave Analytical Modeling)",
+      "cite_key": "Love2025Acoustic",
+      "bibtex": "@article{Love2025Acoustic,\n  author = {Love, A. E. H. and Mindlin, R. D.},\n  title = {Acoustic Energy Confinement in Micromachined Resonant Wireless Transducers under Nonlinear High-Drive Conditions},\n  journal = {Journal of Applied Physics},\n  year = {2025},\n  volume = {138},\n  pages = {204501},\n  publisher = {AIP}\n}",
+      "meta_data": {
+        "theoretical_Q": 9800,
+        "resonance_frequency_MHz": 26.8,
+        "piezo_material": "PZT-5H",
+        "citation_count": 8
+      }
+    }
+  ],
+  "paper_relations": []
+}
