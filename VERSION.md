@@ -8,7 +8,7 @@
 - **Git-based 聯邦共創腳本**：新增 `export_contributions.py`（學生導出 JSON）與 `rebuild_lab_brain.py`（一鍵重構本機聯邦庫），徹底消滅二進位衝突。
 - **實體共創範例資產**：新增 contributions 目錄與 [contrib_matching_circuit.json](file:///Users/wuulong/github/bmad-pa/events/AIBooks/PersonalEmpowerment/PersonalAI-Empowerment/data/research/contributions/contrib_matching_circuit.json) 範例檔案，保障讀者一鍵重建大腦時的「滿配震撼體感」。
 - **防止 AI 污染與能力繼承**：設計誤差閥值過濾器與思考血統證明（Thought Lineage Signature），並推行 SOP 技能（Skills）秒級繼承，消滅學術斷代。
-- **實體提案詳見**：[v1.2.3_Proposal_Federated_Sovereign_Lab_Brain.md](file:///Users/wuulong/github/bmad-pa/events/AIBooks/PersonalEmpowerment/planning/v1.2.3_Proposal_Federated_Sovereign_Lab_Brain.md)。
+- **實體提案詳見**：[v1.2.3_Proposal_Federated_Sovereign_Lab_Brain.md](file:///Users/wuulong/github/bmad-pa/events/AIBooks/PersonalEmpowerment/planning/v1.2.3_Proposal_Federated_Sovereign_Lab_Brain.md)、[16_Federated_Sovereign_Philosophy.md](file:///Users/wuulong/github/bmad-pa/events/AIBooks/PersonalEmpowerment/planning/16_Federated_Sovereign_Philosophy.md) 與 [17_Meeting_Feedback_SOP_Proposal.md](file:///Users/wuulong/github/bmad-pa/events/AIBooks/PersonalEmpowerment/planning/17_Meeting_Feedback_SOP_Proposal.md)。
 
 ## [v1.2.2] - 2026-05-25
 ### 🚀 達成里程碑 - 主權重裝協奏（Sovereign Orchestration）自動化閉環正式落地
