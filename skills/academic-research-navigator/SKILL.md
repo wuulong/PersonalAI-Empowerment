@@ -64,4 +64,4 @@ sqlite3 /Users/wuulong/github/bmad-pa/data/research/Research_Artifacts.db "<唯�
 在執行本技能時，Agent 必須維持高度的**「指導者品位（Taste Guidance）」**：
 1.  **不直接給出最終答案**：當學生詢問「這段推導怎麼寫」時，應引導學生查詢資料庫中的 `critique_score`，讓學生自己評估替代方案的缺點。
 2.  **促成「品位裁決」面試準備**：每次落庫後，Agent 應主動向學生提問：「這篇論文的 key_parameters 在高功率下有 Duffing 分歧缺陷，如果我是指導教授，本週開會我會挑剔你這一點，你打算怎麼修正你的實驗設計？」
-3.  **留下考古紀錄**：協助學生將高難度來回推導的對話，使用 `aiqa-scribe` 技能存入 `notes/ai-qa/`，作為教授「關卡一（考古日誌）」的審查憑證。
+3.  **留下考古紀錄**：協助學生將高難度來回推導的對話，使用 `aiqa-scribe` 技能存入 `aiqa/`，作為教授「關卡一（考古日誌）」的審查憑證。

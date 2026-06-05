@@ -45,11 +45,11 @@ SELECT
     t.topic_name AS 主題名稱,
     t.status AS 主題狀態,
     COUNT(DISTINCT p.paper_id) AS 文獻沉澱數,
-    COUNT(DISTINCT s.sim_id) AS 本地模擬數,
+    COUNT(DISTINCT s.evidence_id) AS 本地實體舉證數,
     COUNT(DISTINCT m.manuscript_id) AS 手稿產出數
 FROM topics t
 LEFT JOIN papers p ON t.topic_id = p.topic_id
-LEFT JOIN local_simulations s ON p.paper_id = s.paper_id
+LEFT JOIN empirical_evidences s ON p.paper_id = s.paper_id
 LEFT JOIN my_manuscripts m ON t.topic_id = m.topic_id
 GROUP BY t.topic_id
 ORDER BY t.sequence_order;
@@ -62,12 +62,12 @@ ORDER BY t.sequence_order;
 ```sql
 SELECT 
     p.cite_key AS 文獻代碼,
-    s.sim_id AS 模擬序號,
-    json_extract(s.run_config, '$.drive_voltage') AS 驅動電壓,
-    s.discrepancy_percentage AS 理論與實測誤差比
-FROM local_simulations s
+    s.evidence_id AS 舉證序號,
+    json_extract(s.practice_scenario, '$.drive_voltage') AS 驅動電壓,
+    s.friction_percentage AS 物理摩擦偏離度
+FROM empirical_evidences s
 JOIN papers p ON s.paper_id = p.paper_id
-WHERE s.discrepancy_percentage > 10.0;
+WHERE s.friction_percentage > 10.0;
 ```
 *   **治理判讀**：如果列表中出現如 `sim_run_2` 在 12V 高驅動下與理論偏離達 `23.47%` 的資料，這證明小明**成功捕捉到了壓電材料的高驅動非線性 Duffing 分歧臨界失效點**！這是一個極具學術價值的重大發現，也是博士論文的完美突破口。反之，如果小明所有模擬的誤差都是完美的 `0%`，則說明他只是在做無意義的線性驗證，甚至有**資料捏造（Data Fitting）**的嫌疑。
 
